@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="BookStore@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="BookStore">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="Ecommerce"/>
+    <schema id="4" parent="1" name="information_schema"/>
+    <schema id="5" parent="1" name="mysql"/>
+    <schema id="6" parent="1" name="performance_schema"/>
+    <schema id="7" parent="1" name="sys"/>
+    <table id="8" parent="2" name="Book"/>
+    <table id="9" parent="2" name="User"/>
+    <column id="10" parent="8" name="ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="11" parent="8" name="BookName">
+      <Position>2</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="12" parent="8" name="ISBN">
+      <Position>3</Position>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <column id="13" parent="8" name="Price">
+      <Position>4</Position>
+      <DataType>decimal(5,1)|0</DataType>
+    </column>
+    <column id="14" parent="8" name="Amount">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <DefaultExpression>&apos;999&apos;</DefaultExpression>
+    </column>
+    <column id="15" parent="8" name="Press">
+      <Position>6</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="16" parent="8" name="Author">
+      <Position>7</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <key id="17" parent="8" name="PRIMARY">
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="18" parent="9" name="Email">
+      <Position>1</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="19" parent="9" name="Password">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+      <DefaultExpression>&apos;123456&apos;</DefaultExpression>
+    </column>
+    <column id="20" parent="9" name="UserName">
+      <Position>3</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <key id="21" parent="9" name="PRIMARY">
+      <ColNames>Email</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
