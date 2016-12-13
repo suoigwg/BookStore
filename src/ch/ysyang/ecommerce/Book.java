@@ -67,4 +67,19 @@ public class Book {
     public void setPrice(double price) {
         Price = price;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Book book = (Book) o;
+
+        return ID == book.ID;
+    }
+
+    @Override
+    public int hashCode() {
+        return ID;
+    }
 }

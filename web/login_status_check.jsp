@@ -17,7 +17,8 @@
         out.print("你没有登录");
         out.print("<a href=\"login.jsp\">Login</a>");
     }else{
-        response.sendRedirect(request.getContextPath()+"/index.jsp");
+        request.getRequestDispatcher(request.getContextPath()+"index.jsp").forward(request,response);
+
     }
 %>
 

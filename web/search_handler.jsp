@@ -16,12 +16,7 @@
     <h1>Search Results For </h1>
     <h2><%=request.getParameter("keyword")%></h2>
     <table>
-        <tr>
-            <td>BookName</td>
-            <td>Price</td>
-            <td>Amount</td>
-            <td>Press</td>
-        </tr>
+
 
             <%
             request.setCharacterEncoding("utf-8");
@@ -30,10 +25,25 @@
       JDBConnection con = new JDBConnection();
       String sql = "select * from Book where BookName like '%"+keyword+"%' or Press like '%"+keyword+"%'";
       ResultSet resultSet = con.executeQuery(sql);
+      if(!resultSet.next()){
+          out.print("No search results for "+ keyword);
+      }
+      else {
+          %>
+                <tr>
+        <td>BookName</td>
+        <td>Price</td>
+        <td>Amount</td>
+        <td>Press</td>
+    </tr>
+                    <%
+
+      }
+      resultSet.beforeFirst();
       while (resultSet.next()){
     %>
         <tr>
-            <td><%=resultSet.getString("BookName")%></td>
+            <td><a href="detail.jsp?id=<%=resultSet.getString("ID")%>"><%=resultSet.getString("BookName")%></a> </td>
             <td><%=resultSet.getString("Price")%></td>
             <td><%=resultSet.getString("Amount")%></td>
             <td><%=resultSet.getString("Press")%></td>

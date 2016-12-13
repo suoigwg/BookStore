@@ -6,7 +6,7 @@ import java.sql.*;
 
 
 public class JDBConnection {
-    private final String url = "jdbc:mysql://localhost:3306/BookStore";
+    private final String url = "jdbc:mysql://localhost:3306/BookStore?characterEncoding=utf-8";
     private final String userName = "finley";
     private final String password = "password";
     private Connection con = null;
@@ -33,6 +33,15 @@ public class JDBConnection {
         return con;
     }
 
+    public Connection getConnection(){
+        if (con == null){
+            createConnection();
+            return con;
+        }
+        else{
+            return con;
+        }
+    }
 
     public int executeUpdate(String sql) {
         int iCount;
@@ -55,7 +64,7 @@ public class JDBConnection {
 
     public ResultSet executeQuery(String sql) {
         ResultSet rs;
-        System.out.print(sql);
+        System.out.println(sql);
         try {
             if (con == null) {
                 createConnection();
@@ -75,15 +84,13 @@ public class JDBConnection {
         return rs;
     }
 
+
+
+
     public boolean isContained(String sql){
         ResultSet resultSet = executeQuery(sql);
         try {
-            if (!resultSet.next()){
-                return false;
-            }
-            else{
-                return true;
-            }
+            return resultSet.next();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -17,19 +17,13 @@ public class Register extends HttpServlet {
     boolean hasEmailExist(String email){
         String sql = "select * from User where email = '"+email+"'";
         JDBConnection con = new JDBConnection();
-        if (con.isContained(sql)){
-            return true;
-        }
-        return false;
+        return con.isContained(sql);
     }
 
     private boolean insertUserdata(String email, String password, String username){
         String sql = "insert into User values ('"+email+"','"+password+"','"+username+"')";
         JDBConnection con = new JDBConnection();
-        if (con.executeUpdate(sql) > 0){
-            return true;
-        }
-        return false;
+        return con.executeUpdate(sql) > 0;
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,6 +38,7 @@ public class Register extends HttpServlet {
             if(insertUserdata(email,pw,username)){
                 out.println("Register success!");
                 out.print("An Email has been send to your mailbox at "+ email);
+                response.sendRedirect(request.getContextPath()+"index.jsp");
             }
             else{
                 out.print("Register fail!");

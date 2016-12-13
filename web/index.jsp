@@ -11,37 +11,76 @@
 <%@ page import="java.sql.Connection" %>
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" >
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <title>Welcome to Nozama!</title>
   </head>
   <body>
-  <a href="login.jsp">Login</a>
-  <a href="register.jsp">Register</a>
-  <a href="login_status_check.jsp">Login Check</a>
-  <h1>Welcome to Nozama!</h1>
-  <hr>
-  <form method="get" action="search_handler.jsp">
-    Search: <input type="text" name="keyword">
-    <input type="submit" value="Search">
-  </form>
+  <jsp:include page="navbar.jsp"></jsp:include>
 
-  <table>
+  <div class="container">
+    <form method="get" action="search_handler.jsp">
+      <div class="input-group input-group-md">
+        <input type="text" name="keyword" class="form-control">
+        <span class="input-group-btn"><button class=" btn btn-default" type="submit" value="Search">Search</button></span>
+      </div>
+    </form>
+  </div>
+
+  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+      <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+      <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="/img/us1.jpg" alt="holiday">
+        <div class="carousel-caption">
+
+        </div>
+      </div>
+      <div class="item">
+        <img src="/img/us2.jpg" alt="holiday2">
+        <div class="carousel-caption">
+
+        </div>
+      </div>
+      <div class="item">
+        <img src="/img/us3.jpg" alt="holiday3">
+        <div class="carousel-caption">
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <table class="table table-bordered table-striped table-hover">
     <tr>
       <td>BookName</td>
-      <td>Price</td>
-      <td>Amount</td>
-      <td>Press</td>
     </tr>
     <%
       JDBConnection con = new JDBConnection();
-      String sql = "select * from Book";
+      String sql = "select * from Book limit 50";
       ResultSet resultSet = con.executeQuery(sql);
       while (resultSet.next()){
     %>
     <tr>
-      <td><%=resultSet.getString("BookName")%></td>
-      <td><%=resultSet.getString("Price")%></td>
-      <td><%=resultSet.getString("Amount")%></td>
-      <td><%=resultSet.getString("Press")%></td>
+      <td><a href="detail.jsp?id=<%=resultSet.getString("ID")%>"><%=resultSet.getString("BookName")%></a></td>
     </tr>
 
 

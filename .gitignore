@@ -1,1 +1,54 @@
 # Created by .ignore support plugin (hsz.mobi)
+### Java template
+*.class
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+### macOS template
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+.gitignore
+.idea/dataSources.local.xml
+.idea/dataSources/eba4e022-a9f2-4367-97c3-4fcb323aac50/_src_/
+.idea/dataSources/eba4e022-a9f2-4367-97c3-4fcb323aac50/_staging_/
+.idea/dataSources/ebb1bea7-1e68-4578-9a72-1a060b09ea4e/_src_/
+.idea/dataSources/ebb1bea7-1e68-4578-9a72-1a060b09ea4e/_staging_/
+.idea/workspace.xml
+out/
+src/ch/ysyang/.DS_Store

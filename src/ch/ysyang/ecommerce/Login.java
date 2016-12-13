@@ -24,12 +24,10 @@ public class Login extends HttpServlet {
         String sql = "SELECT * from User where email = \'"+email+"\' and password = \'"+password+"\';";
         ResultSet resultSet = connection.executeQuery(sql);
         if (!resultSet.next()){
-            connection.closeConnection();
             return false;
         }
         else {
             username = resultSet.getString("UserName");
-            connection.closeConnection();
             return true;
         }
     }
@@ -40,7 +38,9 @@ public class Login extends HttpServlet {
         try {
             if (check(email,password) == true){
                 request.getSession().setAttribute("username",username);
-                request.getRequestDispatcher(request.getContextPath()+"/login_success.jsp").forward(request,response);
+                request.getSession().setAttribute("email",email);
+
+                response.sendRedirect(request.getContextPath()+"/login_success.jsp");
 //                response.sendRedirect(request.getContextPath()+"/login_success.jsp");
             }
             else{

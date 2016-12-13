@@ -14,6 +14,8 @@
 
     <h1>Login Success!</h1>
     <h2>Welcome <%=session.getAttribute("username")%></h2>
-
+    <%
+        request.getRequestDispatcher(request.getContextPath()+"index.jsp").forward(request,response);
+    %>
 </body>
 </html>
