@@ -6,27 +6,15 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="ch.ysyang.ecommerce.JDBConnection" %>
-<%@ page import="java.sql.ResultSet" %>
-<%@ page import="java.sql.Connection" %>
 <html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" >
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <title>Welcome to Nozama!</title>
-  </head>
-  <body>
-  <jsp:include page="navbar.jsp"></jsp:include>
-
-  <div class="container">
-    <form method="get" action="search_handler.jsp">
-      <div class="input-group input-group-md">
-        <input type="text" name="keyword" class="form-control">
-        <span class="input-group-btn"><button class=" btn btn-default" type="submit" value="Search">Search</button></span>
-      </div>
-    </form>
-  </div>
+<head>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <script src="js/jquery-3.1.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <title>Welcome to Nozama!</title>
+</head>
+<body>
+<jsp:include page="navbar.jsp"></jsp:include>
 
   <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -69,25 +57,40 @@
     </a>
   </div>
 
-  <table class="table table-bordered table-striped table-hover">
-    <tr>
-      <td>BookName</td>
-    </tr>
-    <%
-      JDBConnection con = new JDBConnection();
-      String sql = "select * from Book limit 50";
-      ResultSet resultSet = con.executeQuery(sql);
-      while (resultSet.next()){
-    %>
-    <tr>
-      <td><a href="detail.jsp?id=<%=resultSet.getString("ID")%>"><%=resultSet.getString("BookName")%></a></td>
-    </tr>
+<br><br>
 
+<div class="container">
+  <div class="row">
 
-    <%
+    <div class="col-lg-3">
+      <p class="lead text-center">Welcome</p>
+      <p class="text-center">Sign in for the best experience</p>
+      <a href="register.jsp">
+        <button type="button" class="btn btn-lg btn-primary btn-block">Sign in</button>
+      </a>
 
-      }
-    %>
-  </table>
+    </div>
+
+    <div class="col-lg-3">
+      <p class="lead text-left">Most popular</p>
+
+    </div>
+
+    <div class="col-lg-3">
+      <p class="lead text-left">Editor's choice</p>
+    </div>
+
+    <div class="col-lg-3">
+      <p class="lead text-left">By Category</p>
+      <ul>
+        <li><a>Book</a></li>
+        <li><a>Electronics</a></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<jsp:include page="footer.jsp"></jsp:include>
   </body>
 </html>

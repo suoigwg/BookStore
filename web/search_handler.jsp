@@ -7,15 +7,20 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" import="ch.ysyang.ecommerce.JDBConnection" %>
 <%@ page import="java.sql.ResultSet" %>
-<%@ page import="java.sql.Connection" %>
 <html>
 <head>
     <title>Search Result</title>
 </head>
 <body>
-    <h1>Search Results For </h1>
-    <h2><%=request.getParameter("keyword")%></h2>
-    <table>
+<jsp:include page="navbar.jsp"></jsp:include>
+
+<div class="container">
+    <div class="row">
+        <h1 class="lead" id="searchResultTitle"><strong>Search Results For</strong> <%=request.getParameter("keyword")%>
+        </h1>
+    </div>
+
+    <table class="table table-responsive table-hover">
 
 
             <%
@@ -30,23 +35,24 @@
       }
       else {
           %>
-                <tr>
-        <td>BookName</td>
-        <td>Price</td>
-        <td>Amount</td>
-        <td>Press</td>
-    </tr>
-                    <%
+        <tr>
+            <td><strong>Title</strong></td>
+            <td><strong>Price</strong></td>
+            <td><strong>Press</strong></td>
+        </tr>
+            <%
 
       }
       resultSet.beforeFirst();
       while (resultSet.next()){
     %>
         <tr>
-            <td><a href="detail.jsp?id=<%=resultSet.getString("ID")%>"><%=resultSet.getString("BookName")%></a> </td>
-            <td><%=resultSet.getString("Price")%></td>
-            <td><%=resultSet.getString("Amount")%></td>
-            <td><%=resultSet.getString("Press")%></td>
+            <td><a href="detail.jsp?id=<%=resultSet.getString("ID")%>"><%=resultSet.getString("BookName")%>
+            </a></td>
+            <td><%=resultSet.getString("Price")%>
+            </td>
+            <td><%=resultSet.getString("Press")%>
+            </td>
         </tr>
 
 
@@ -54,5 +60,9 @@
 
       }
     %>
+</div>
+
+
 </body>
+
 </html>

@@ -8,20 +8,45 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <title>Title</title>
 </head>
 <body>
-<form method="post" action="/login">
-    <ul>
-        <li>Email: <input type="text" size="30" name="email" value="admin@1.com"></li>
-        <li>Password: <input type="password" name="password" value="admin"></li>
-        <li>Remember me: <input type="checkbox" name="remember" checked="n"></li>
-        <li><input type="submit" value="Submit"></li>
-    </ul>
-</form>
+
+<h1 class="text-center">Welcome to Nozama!</h1>
+<div id="loginForm">
+    <form method="post" action="/login">
+        <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input value="admin@1.com" name="email" type="email" class="form-control" id="exampleInputEmail1"
+                       placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input value="admin" name="password" type="password" class="form-control" id="exampleInputPassword1"
+                       placeholder="Password">
+            </div>
+
+            <div class="checkbox">
+                <label>
+                    <input name="remember" type="checkbox"> Remember me
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Log in</button>
+            <br>
+            <p class="text-center">or</p><br>
+            <a href="register.jsp">
+                <button type="button" class="btn btn-default btn-block">Create a new account</button>
+            </a>
+
+        </form>
+    </form>
+</div>
+
 
 </body>
 </html>
