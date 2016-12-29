@@ -46,86 +46,90 @@
       <Position>7</Position>
       <DataType>varchar(45)|0</DataType>
     </column>
-    <key id="19" parent="8" name="PRIMARY">
+    <column id="19" parent="8" name="type">
+      <Position>8</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <key id="20" parent="8" name="PRIMARY">
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="20" parent="9" name="orderid">
+    <column id="21" parent="9" name="orderid">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="21" parent="9" name="email">
+    <column id="22" parent="9" name="email">
       <Position>2</Position>
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="22" parent="9" name="data">
+    <column id="23" parent="9" name="data">
       <Position>3</Position>
       <DataType>datetime|0</DataType>
     </column>
-    <column id="23" parent="9" name="address">
+    <column id="24" parent="9" name="address">
       <Position>4</Position>
       <DataType>varchar(45)|0</DataType>
     </column>
-    <column id="24" parent="9" name="mobile">
+    <column id="25" parent="9" name="mobile">
       <Position>5</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="25" parent="9" name="receiver">
+    <column id="26" parent="9" name="receiver">
       <Position>6</Position>
       <DataType>varchar(45)|0</DataType>
     </column>
-    <key id="26" parent="9" name="PRIMARY">
+    <key id="27" parent="9" name="PRIMARY">
       <ColNames>orderid</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="27" parent="10" name="Email">
+    <column id="28" parent="10" name="Email">
       <Position>1</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="28" parent="10" name="Password">
+    <column id="29" parent="10" name="Password">
       <Position>2</Position>
       <DataType>varchar(45)|0</DataType>
       <DefaultExpression>&apos;123456&apos;</DefaultExpression>
     </column>
-    <column id="29" parent="10" name="UserName">
+    <column id="30" parent="10" name="UserName">
       <Position>3</Position>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <key id="30" parent="10" name="PRIMARY">
+    <key id="31" parent="10" name="PRIMARY">
       <ColNames>Email</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="31" parent="11" name="orderid">
+    <column id="32" parent="11" name="orderid">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="32" parent="11" name="bookid">
+    <column id="33" parent="11" name="bookid">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="33" parent="11" name="amount">
+    <column id="34" parent="11" name="amount">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <index id="34" parent="11" name="bookid">
+    <index id="35" parent="11" name="bookid">
       <ColNames>bookid</ColNames>
     </index>
-    <index id="35" parent="11" name="orderid">
+    <index id="36" parent="11" name="orderid">
       <ColNames>orderid</ColNames>
     </index>
-    <foreign-key id="36" parent="11" name="orderdetail_ibfk_1">
+    <foreign-key id="37" parent="11" name="orderdetail_ibfk_1">
       <ColNames>orderid</ColNames>
       <RefSchemaName>bookstore</RefSchemaName>
       <RefTableName>Order</RefTableName>
       <RefColNames>orderid</RefColNames>
       <OnDelete>delete</OnDelete>
     </foreign-key>
-    <foreign-key id="37" parent="11" name="orderdetail_ibfk_2">
+    <foreign-key id="38" parent="11" name="orderdetail_ibfk_2">
       <ColNames>bookid</ColNames>
       <RefSchemaName>bookstore</RefSchemaName>
       <RefTableName>Book</RefTableName>

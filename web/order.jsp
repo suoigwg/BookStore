@@ -13,16 +13,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>My order</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <title>我的订单</title>
 </head>
 <body>
-    <h1>Please confirm your order</h1>
-    <table>
+<h1>请确认您的订单</h1>
+<table class="table table-hover">
         <%
             if (session.getAttribute("cart") == null){
         %>
-        <h1>Your cart is empty, check out the homepage</h1>
-        <a href="index.jsp">Back home</a>
+    <h3>您的购物车为空</h3>
         <%
         }
         else{
@@ -38,11 +41,16 @@
                 Integer amt = ait.next();
         %>
         <tr>
-            <td>BookName:   <%=b.getBookName()%></td>
-            <td>Price:      <%=b.getPrice()%></td>
-            <td>Press:      <%=b.getPress()%></td>
-            <td>Author:     <%=b.getAuthor()%></td>
-            <td>Amount:     <%=amt%></td>
+            <td>书名:   <%=b.getBookName()%>
+            </td>
+            <td>价格:      <%=b.getPrice()%>
+            </td>
+            <td>出版社:      <%=b.getPress()%>
+            </td>
+            <td>作者:     <%=b.getAuthor()%>
+            </td>
+            <td>数目:     <%=amt%>
+            </td>
 
         </tr>
         <%
@@ -56,12 +64,18 @@
         %>
 
     </table>
-    <h1>Please complete your receiving address</h1>
-    <form action="/order" method="post">
+<h1>请确认您的收货地址</h1>
+<form class="form-group" action="/order" method="post">
         <table>
-            <tr><td>Receiver: <input type="text" name="receiver" value="TestRecevier"></td></tr>
-            <tr><td>Address: <input type="text" name="address" value="TestAddr"></td></tr>
-            <tr><td>Mobile:  <input type="number" size="11" name="mobile" value="133323"></td></tr>
+            <tr>
+                <td>收件热: <input type="text" name="receiver" value="TestRecevier"></td>
+            </tr>
+            <tr>
+                <td>地址: <input type="text" name="address" value="TestAddr"></td>
+            </tr>
+            <tr>
+                <td>联系方式: <input type="number" size="11" name="mobile" value="133323"></td>
+            </tr>
             <tr><td><input type="submit" value="Confirm"></td></tr>
         </table>
     </form>

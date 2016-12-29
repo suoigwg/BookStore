@@ -16,31 +16,31 @@
 </head>
 <body>
 
-<h1 class="text-center">Welcome to Nozama!</h1>
+<h1 class="text-center">欢迎</h1>
 <div id="loginForm">
     <form method="post" action="/login">
         <form>
             <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
+                <label for="exampleInputEmail1">邮件地址</label>
                 <input value="admin@1.com" name="email" type="email" class="form-control" id="exampleInputEmail1"
                        placeholder="Email">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
+                <label for="exampleInputPassword1">密码</label>
                 <input value="admin" name="password" type="password" class="form-control" id="exampleInputPassword1"
                        placeholder="Password">
             </div>
 
             <div class="checkbox">
                 <label>
-                    <input name="remember" type="checkbox"> Remember me
+                    <input name="remember" type="checkbox">记住我
                 </label>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Log in</button>
+            <button type="submit" class="btn btn-primary btn-block">登录</button>
             <br>
-            <p class="text-center">or</p><br>
+            <p class="text-center">或</p><br>
             <a href="register.jsp">
-                <button type="button" class="btn btn-default btn-block">Create a new account</button>
+                <button type="button" class="btn btn-default btn-block">创建一个新账户</button>
             </a>
 
         </form>

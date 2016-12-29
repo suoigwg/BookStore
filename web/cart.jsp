@@ -1,9 +1,7 @@
 <%@ page import="ch.ysyang.ecommerce.Cart" %>
-<%@ page import="java.util.HashMap" %>
 <%@ page import="ch.ysyang.ecommerce.Book" %>
-<%@ page import="java.util.Set" %>
-<%@ page import="java.util.Iterator" %>
-<%@ page import="java.util.Collection" %><%--
+<%@ page import="ch.ysyang.ecommerce.BookDAO" %>
+<%@ page import="java.util.*" %><%--
   Created by IntelliJ IDEA.
   User: ysyang
   Date: 12/12/2016
@@ -13,54 +11,133 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <title>Cart</title>
 </head>
 <body>
-    <table>
-    <%
-        if (session.getAttribute("cart") == null){
+<jsp:include page="navbar.jsp"></jsp:include>
+<div class="container">
+    <table class="table table-hovered ">
+        <%
+            if (session.getAttribute("cart") == null) {
             %>
-        <h1>Your cart is empty, check out the homepage</h1>
-        <a href="index.jsp">Back home</a>
-    <%
-        }
-        else{
+
+        <%
+            String recentViewed = "";
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie c : cookies) {
+                    if (c.getName().equals("RecentViewed")) {
+                        recentViewed = c.getValue();
+                    }
+                }
+            }
+
+        %>
+
+
+        <div class="container" id="emptyCartMsg">
+            <h1>您的购物车是空的</h1>
+            <p class="lead">您最近浏览过的商品
+            </p>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <%
+                        BookDAO bd = new BookDAO();
+                        ArrayList<Book> rv = bd.getRecentViewList(recentViewed);
+
+                        if (rv != null) {
+                            for (Book b : rv) {
+                                if (b != null) {
+                    %>
+                    <ul>
+                        <li><a href="detail.jsp?id=<%=b.getID()%>"><%=b.getBookName()%>
+                        </a></li>
+                    </ul>
+                    <% }
+                    }
+                    }
+                    %>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6" align="center">
+                    <%
+                        if (session.getAttribute("email") == null) {
+                    %>
+                    <p class="text-center">注册以获得更好体验</p>
+                    <a href="login.jsp">
+                        <button type="button" class="btn btn-primary btn-lg">Sign in</button>
+                    </a>
+                    <%
+                    } else {
+                    %>
+                    <p class="lead">欢迎 <span><%=session.getAttribute("username")%></span></p>
+                    <%
+                        }
+                    %>
+                </div>
+
+            </div>
+        </div>
+
+
+        <%
+        } else {
             Cart c = (Cart) session.getAttribute("cart");
             c.printItemList();
-            HashMap<Book,Integer> itemlist = c.getCartItems();
+            HashMap<Book, Integer> itemlist = c.getCartItems();
             Set<Book> booklist = itemlist.keySet();
             Collection<Integer> amountlist = itemlist.values();
             Iterator<Integer> ait = amountlist.iterator();
             Iterator<Book> bit = booklist.iterator();
-            while (ait.hasNext() && bit.hasNext()){
+        %>
+        <tr>
+            <td>书名</td>
+            <td>价格</td>
+            <td>出版社</td>
+            <td>作者</td>
+        </tr>
+
+        <%
+            while (ait.hasNext() && bit.hasNext()) {
                 Book b = bit.next();
                 Integer amt = ait.next();
-                %>
-                <tr>
-                    <td>BookName:   <%=b.getBookName()%></td>
-                    <td>Price:      <%=b.getPrice()%></td>
-                    <td>Press:      <%=b.getPress()%></td>
-                    <td>Author:     <%=b.getAuthor()%></td>
-                    <td>Amount:     <%=amt%></td>
-                    <td><a href="/cartservlet?action=remove&bookid=<%=b.getID()%>&buyamount=<%=amt.toString()%>">Delete</a></td>
-                    <td><a href="/cartservlet?action=removeone&bookid=<%=b.getID()%>&buyamount=<%=amt.toString()%>">Decrease One</a></td>
-                    <td><a href="/cartservlet?action=addone&bookid=<%=b.getID()%>&buyamount=<%=amt.toString()%>">Increase One</a></td>
+        %>
+        <tr>
+            <td><%=b.getBookName()%>
+            </td>
+            <td><%=b.getPrice()%>
+            </td>
+            <td><%=b.getPress()%>
+            </td>
+            <td><%=b.getAuthor()%>
+            </td>
+            <td><%=amt%>
+            </td>
+            <td>数目</td>
+            <td><a href="/cartservlet?action=remove&bookid=<%=b.getID()%>&buyamount=<%=amt.toString()%>">删除 </a></td>
+            <td><a href="/cartservlet?action=removeone&bookid=<%=b.getID()%>&buyamount=<%=amt.toString()%>">-1 </a></td>
+            <td><a href="/cartservlet?action=addone&bookid=<%=b.getID()%>&buyamount=<%=amt.toString()%>">+1 </a></td>
 
-                </tr>
-    <%
+        </tr>
+        <%
             }
             %>
         <tr>
-            <td>Total Price: <%=c.getTotalPrice()%></td>
-            <td><a href="/cartservlet?action=empty">Empty Cart</a></td>
-            <td><a href="order.jsp">Make Payment</a></td>
-            <td><a href="index.jsp">Back Home</a></td>
+            <td>总金额: <%=c.getTotalPrice()%>
+            </td>
+            <td><a href="/cartservlet?action=empty">清空购物车 </a></td>
+            <td><a href="order.jsp">支付</a></td>
         </tr>
         <%
-        }
-    %>
+            }
+        %>
 
     </table>
+</div>
 
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

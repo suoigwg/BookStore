@@ -70,7 +70,7 @@
         </div>
 
         <div class="col-lg-6 col-md-6 col-sm-6">
-            <img src="img/book.png" width="400" height="400">
+            <img src="img/book.png" class="pull-right" width="400" height="400">
         </div>
         <%
 
@@ -92,9 +92,6 @@
         <% }
         }
         }
-
-        %>
-        <%
 
         %>
 

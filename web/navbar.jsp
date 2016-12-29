@@ -18,7 +18,7 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Nozama</a>
+            <a class="navbar-brand" href="index.jsp">Nozama</a>
         </div>
 
 
@@ -28,23 +28,23 @@
                     if (session.getAttribute("username")!=null){
                         %>
                 <span><%=session.getAttribute("username")%>&nbsp;&nbsp;</span>
-                <a href="logout.jsp">Logout</a>&nbsp;&nbsp;
+                <a href="logout.jsp">退出</a>&nbsp;&nbsp;
                 <%
                     }else{
                         %>
-                    <a href="login.jsp" >Login</a>&nbsp;&nbsp;
-                    <a href="register.jsp">Register</a>&nbsp;&nbsp;
+                    <a href="login.jsp">登录</a>&nbsp;&nbsp;
+                    <a href="register.jsp">注册</a>&nbsp;&nbsp;
                 <%
                     }
                 %>
-                <a href="manage.jsp" hidden="hidden">Manage</a>&nbsp;&nbsp;
-                <a href="cart.jsp">My Cart</a>&nbsp;&nbsp;
-                <a href="orderlist.jsp">My Order</a>&nbsp;&nbsp;
+                <a href="manage.jsp" hidden="hidden">管理</a>&nbsp;&nbsp;
+                <a href="cart.jsp">购物车</a>&nbsp;&nbsp;
+                <a href="orderlist.jsp">订单</a>&nbsp;&nbsp;
             </span>
 
             <div class="form-group hidden-xs">
-                    <input name="keyword" type="text" class="form-control" placeholder="Search">
-                    <button type="submit" class="btn btn-default  hidden-xs" >Search</button>
+                <input name="keyword" type="text" class="form-control" placeholder="搜索">
+                <button type="submit" class="btn btn-default  hidden-xs">搜索</button>
 
             </div>
 

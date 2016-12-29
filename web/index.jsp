@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.Random" %><%--
   Created by IntelliJ IDEA.
   User: ysyang
   Date: 10/12/2016
@@ -8,9 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-  <script src="js/jquery-3.1.1.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
   <title>Welcome to Nozama!</title>
 </head>
 <body>
@@ -62,29 +59,41 @@
 <div class="container">
   <div class="row">
 
-    <div class="col-lg-3">
-      <p class="lead text-center">Welcome</p>
-      <p class="text-center">Sign in for the best experience</p>
+    <div class="col-lg-4">
+      <%
+        if (session.getAttribute("username") == null) {
+      %>
+      <p class="lead text-center">欢迎</p>
       <a href="register.jsp">
-        <button type="button" class="btn btn-lg btn-primary btn-block">Sign in</button>
+        <button type="button" class="btn btn-lg btn-primary btn-block">登录</button>
       </a>
+      <%
+      } else {
+      %>
+      <br><br><br>
+      <p class="lead text-center">欢迎 <%=session.getAttribute("username")%>
+      </p>
+      <%
+        }
+      %>
+    </div>
+
+    <div class="col-lg-4">
+      <%
+        Random ran = new Random();
+        int x = ran.nextInt(4000) + 5;
+      %>
+      <p class="lead text-left"><a href="detail.jsp?id=<%=x%>">随便看看</a></p>
 
     </div>
 
-    <div class="col-lg-3">
-      <p class="lead text-left">Most popular</p>
-
-    </div>
-
-    <div class="col-lg-3">
-      <p class="lead text-left">Editor's choice</p>
-    </div>
-
-    <div class="col-lg-3">
-      <p class="lead text-left">By Category</p>
+    <div class="col-lg-4">
+      <p class="lead text-left">按目录浏览</p>
       <ul>
-        <li><a>Book</a></li>
-        <li><a>Electronics</a></li>
+        <li><a href="catelog.jsp?typeid=1">教材教辅</a></li>
+        <li><a href="catelog.jsp?typeid=2">文学名著</a></li>
+        <li><a href="catelog.jsp?typeid=3">儿童读物</a></li>
+
       </ul>
     </div>
   </div>
