@@ -1,6 +1,6 @@
-<%@ page import="ch.ysyang.ecommerce.Cart" %>
 <%@ page import="ch.ysyang.ecommerce.Book" %>
 <%@ page import="ch.ysyang.ecommerce.BookDAO" %>
+<%@ page import="ch.ysyang.ecommerce.Cart" %>
 <%@ page import="java.util.*" %><%--
   Created by IntelliJ IDEA.
   User: ysyang
@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="css/custom.css">
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <title>Cart</title>
+    <title>购物车</title>
 </head>
 <body>
 <jsp:include page="navbar.jsp"></jsp:include>

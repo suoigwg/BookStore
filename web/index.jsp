@@ -59,12 +59,12 @@
 <div class="container">
   <div class="row">
 
-    <div class="col-lg-4">
+    <div class="col-lg-3">
       <%
         if (session.getAttribute("username") == null) {
       %>
       <p class="lead text-center">欢迎</p>
-      <a href="register.jsp">
+      <a href="register.jsp" class="text-center">
         <button type="button" class="btn btn-lg btn-primary btn-block">登录</button>
       </a>
       <%
@@ -77,17 +77,20 @@
         }
       %>
     </div>
+    <div class="col-lg-3">
 
-    <div class="col-lg-4">
+    </div>
+
+
+    <div class="col-lg-6">
+
+
       <%
         Random ran = new Random();
         int x = ran.nextInt(4000) + 5;
       %>
       <p class="lead text-left"><a href="detail.jsp?id=<%=x%>">随便看看</a></p>
 
-    </div>
-
-    <div class="col-lg-4">
       <p class="lead text-left">按目录浏览</p>
       <ul>
         <li><a href="catelog.jsp?typeid=1">教材教辅</a></li>

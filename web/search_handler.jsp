@@ -16,7 +16,7 @@
 
 <div class="container">
     <div class="row">
-        <h1 class="lead" id="searchResultTitle"><strong>Search Results For</strong> <%=request.getParameter("keyword")%>
+        <h1 class="lead" id="searchResultTitle"><%=request.getParameter("keyword")%><strong>的搜索结果</strong>
         </h1>
     </div>
 
