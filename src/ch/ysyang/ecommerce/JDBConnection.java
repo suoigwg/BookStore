@@ -6,9 +6,9 @@ import java.sql.*;
 
 
 public class JDBConnection {
-    private final String url = "jdbc:mysql://localhost:3306/BookStore?characterEncoding=utf-8";
-    private final String userName = "finley";
-    private final String password = "password";
+    private final String url = "jdbc:mysql://115.159.143.108:3306/BookDB?characterEncoding=utf-8";
+    private final String userName = "dbp";
+    private final String password = "";
     private Connection con = null;
 
 

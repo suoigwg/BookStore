@@ -8,9 +8,9 @@ import java.sql.*;
 public class DBconnector {
 
     public static void main(String args[]) throws Exception{
-        String url ="jdbc:mysql://localhost:3306/Ecommerce";
-        String username = "finley";
-        String password = "password";
+        String url ="jdbc:mysql://115.159.143.108:3306/BookDB";
+        String username = "dbp";
+        String password = "";
         Connection cont = DriverManager.getConnection(url,username,password);
 
         Statement stmt = cont.createStatement();
