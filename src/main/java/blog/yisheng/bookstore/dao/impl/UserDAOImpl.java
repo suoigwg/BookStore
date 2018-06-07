@@ -64,7 +64,7 @@ public class UserDAOImpl implements EntityDAO {
         }
     }
 
-    @Override
+
     public ArrayList<BaseEntity> listEntities() {
         String sql = "select * from User;";
         ArrayList<BaseEntity> userList = new ArrayList<BaseEntity>();

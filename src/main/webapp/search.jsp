@@ -5,8 +5,8 @@
   Time: 8:29 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="java.sql.ResultSet" %>
 <%@ page import="blog.yisheng.bookstore.db.JDBConnection" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <html>

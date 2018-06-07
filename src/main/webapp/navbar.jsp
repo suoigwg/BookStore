@@ -22,7 +22,7 @@
         </div>
 
 
-        <form class="navbar-form navbar-left pull-right" method="get" action="search_handler.jsp">
+        <form class="navbar-form navbar-left pull-right" method="get" action="search">
             <span class="hidden-xs">
                 <%
                     if (session.getAttribute("username")!=null){
@@ -45,7 +45,6 @@
             <div class="form-group hidden-xs">
                 <input name="keyword" type="text" class="form-control" placeholder="搜索">
                 <button type="submit" class="btn btn-default  hidden-xs">搜索</button>
-
             </div>
 
         </form>

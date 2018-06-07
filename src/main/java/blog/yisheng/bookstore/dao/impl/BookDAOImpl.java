@@ -20,6 +20,27 @@ public class BookDAOImpl implements EntityDAO {
         conn = new JDBConnection();
     }
 
+    private ArrayList<Book> bookSerializer(ResultSet resultSet) {
+        ArrayList<Book> bookList = new ArrayList<Book>();
+        try {
+            while (resultSet.next()) {
+                Book book = new Book();
+                book.setTitle(resultSet.getString("title"));
+                book.setAuthor(resultSet.getString("author"));
+                book.setISBN(resultSet.getInt("isbn"));
+                book.setPress(resultSet.getString("press"));
+                book.setPrice(resultSet.getDouble("price"));
+                book.setStock(resultSet.getInt("stock"));
+                book.setID(resultSet.getInt("id"));
+                bookList.add(book);
+            }
+        } catch (SQLException e) {
+            logger.info("Empty result set");
+        }
+        return bookList;
+
+    }
+
     @Override
     public void add(BaseEntity obj) {
         Book book = (Book) obj;
@@ -73,10 +94,10 @@ public class BookDAOImpl implements EntityDAO {
         }
     }
 
-    @Override
-    public ArrayList<BaseEntity> listEntities() {
+
+    public ArrayList<Book> listEntities() {
         String sql = "select * from book;";
-        ArrayList<BaseEntity> bookList = new ArrayList<BaseEntity>();
+        ArrayList<Book> bookList = new ArrayList<Book>();
         try {
             ResultSet resultSet = conn.executeQuery(sql);
             while (resultSet.next()) {
@@ -120,5 +141,19 @@ public class BookDAOImpl implements EntityDAO {
             logger.severe(e.getMessage());
         }
         return book;
+    }
+
+    public ArrayList<Book> searchBooks(String keyword) {
+        String sql = "select * from book where title like '%?%'";
+        ArrayList<Book> bookList = new ArrayList<Book>();
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, keyword);
+            ResultSet resultSet = conn.executeQuery(sql);
+            bookList = bookSerializer(resultSet);
+        } catch (SQLException e) {
+            logger.severe(e.getMessage());
+        }
+        return bookList;
     }
 }
