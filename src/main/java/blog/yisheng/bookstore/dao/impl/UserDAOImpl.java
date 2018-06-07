@@ -103,10 +103,10 @@ public class UserDAOImpl implements EntityDAO {
     }
 
     public boolean checkCredentials(User user) {
-        String sql = "select * from User where email = ? and password = ?";
+        String sql = "select * from User where username = ? and password = ?";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, user.getEmail());
+            stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getPassword());
             ResultSet resultSet = stmt.executeQuery();
             return resultSet.next();

@@ -22,8 +22,8 @@
         <form>
             <div class="form-group">
                 <label for="exampleInputEmail1">邮件地址</label>
-                <input value="admin@1.com" name="email" type="email" class="form-control" id="exampleInputEmail1"
-                       placeholder="Email">
+                <input value="Yisheng Yang" name="username" type="text" class="form-control" id="exampleInputEmail1"
+                       placeholder="Username">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">密码</label>

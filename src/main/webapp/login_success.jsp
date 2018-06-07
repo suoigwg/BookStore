@@ -13,7 +13,8 @@
 <body>
 
     <h1>Login Success!</h1>
-    <h2>Welcome <%=session.getAttribute("email")%>
+
+    <h2>Welcome <%=session.getAttribute("user")%>
     </h2>
     <%
         //        request.getRequestDispatcher("/index.jsp").forward(request, response);
