@@ -144,12 +144,12 @@ public class BookDAOImpl implements EntityDAO {
     }
 
     public ArrayList<Book> searchBooks(String keyword) {
-        String sql = "select * from book where title like '%?%'";
+        String sql = "select * from Book where title like ?";
         ArrayList<Book> bookList = new ArrayList<Book>();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, keyword);
-            ResultSet resultSet = conn.executeQuery(sql);
+            stmt.setString(1, "%" + keyword + "%");
+            ResultSet resultSet = stmt.executeQuery();
             bookList = bookSerializer(resultSet);
         } catch (SQLException e) {
             logger.severe(e.getMessage());
