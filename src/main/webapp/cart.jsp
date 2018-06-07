@@ -1,7 +1,7 @@
-<%@ page import="ch.ysyang.ecommerce.Book" %>
-<%@ page import="ch.ysyang.ecommerce.BookDAO" %>
-<%@ page import="ch.ysyang.ecommerce.Cart" %>
-<%@ page import="java.util.*" %><%--
+<%@ page import="blog.yisheng.bookstore.entity.Book" %>
+<%@ page import="blog.yisheng.bookstore.dao.BookDAO" %>
+<%@ page import="java.util.*" %>
+<%--
   Created by IntelliJ IDEA.
   User: ysyang
   Date: 12/12/2016

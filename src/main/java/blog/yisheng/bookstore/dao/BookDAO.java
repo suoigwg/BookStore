@@ -23,12 +23,12 @@ public class BookDAO {
         try{
             if (resultSet.next()){
                 book.setID(id);
-                book.setBookName(resultSet.getString("BookName"));
-                book.setAuthor(resultSet.getString("Author"));
-                book.setISBN(resultSet.getString("ISBN"));
-                book.setPress(resultSet.getString("Press"));
-                book.setPrice(Double.parseDouble(resultSet.getString("Price")));
-                book.setAmount(Integer.parseInt(resultSet.getString("Amount")));
+                book.setBookName(resultSet.getString("title"));
+                book.setAuthor(resultSet.getString("author"));
+                book.setISBN(resultSet.getString("isbn"));
+                book.setPress(resultSet.getString("press"));
+                book.setPrice(Double.parseDouble(resultSet.getString("price")));
+                book.setAmount(Integer.parseInt(resultSet.getString("amount")));
             }
         }catch (Exception e){
             System.out.print("Try block failed");

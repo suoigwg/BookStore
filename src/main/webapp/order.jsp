@@ -1,9 +1,9 @@
-<%@ page import="ch.ysyang.ecommerce.Book" %>
-<%@ page import="ch.ysyang.ecommerce.Cart" %>
 <%@ page import="java.util.Collection" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Iterator" %>
-<%@ page import="java.util.Set" %><%--
+<%@ page import="java.util.Set" %>
+<%@ page import="blog.yisheng.bookstore.entity.Book" %>
+<%@ page import="blog.yisheng.bookstore.entity.Cart" %><%--
   Created by IntelliJ IDEA.
   User: ysyang
   Date: 12/12/2016

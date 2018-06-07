@@ -1,8 +1,8 @@
-<%@ page import="ch.ysyang.ecommerce.Book" %>
-<%@ page import="ch.ysyang.ecommerce.BookDAO" %>
-<%@ page import="ch.ysyang.ecommerce.JDBConnection" %>
 <%@ page import="java.sql.ResultSet" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="blog.yisheng.bookstore.dao.BookDAO" %>
+<%@ page import="blog.yisheng.bookstore.entity.Book" %>
+<%@ page import="blog.yisheng.bookstore.db.JDBConnection" %><%--
   Created by IntelliJ IDEA.
   User: ysyang
   Date: 12/12/2016

@@ -17,7 +17,7 @@ import java.sql.SQLException;
 @WebServlet(name = "AddBook", urlPatterns = {"/addbook"})
 public class AddBook extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String bookname = request.getParameter("bookname");
+        String bookname = request.getParameter("title");
         String isbn = request.getParameter("isbn");
         String price = request.getParameter("price");
         String amount = request.getParameter("amount");

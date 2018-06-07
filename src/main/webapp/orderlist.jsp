@@ -1,5 +1,5 @@
-<%@ page import="ch.ysyang.ecommerce.JDBConnection" %>
-<%@ page import="java.sql.ResultSet" %><%--
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="blog.yisheng.bookstore.db.JDBConnection" %><%--
   Created by IntelliJ IDEA.
   User: ysyang
   Date: 13/12/2016

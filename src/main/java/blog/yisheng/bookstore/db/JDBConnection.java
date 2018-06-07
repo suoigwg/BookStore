@@ -6,9 +6,7 @@ import java.sql.*;
 
 
 public class JDBConnection {
-    private final String url = "jdbc:mysql://115.159.143.108:3306/BookDB?characterEncoding=utf-8";
-    private final String userName = "dbp";
-    private final String password = "";
+    private final String url = "jdbc:sqlite:bookstore.sqlite";
     private Connection con = null;
 
 
@@ -23,7 +21,7 @@ public class JDBConnection {
 
     private Connection createConnection() {
         try {
-            con = DriverManager.getConnection(url, userName, password);
+            con = DriverManager.getConnection(url);
             con.setAutoCommit(true);
 
         } catch (SQLException e) {

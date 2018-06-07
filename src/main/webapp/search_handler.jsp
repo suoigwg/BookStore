@@ -5,8 +5,8 @@
   Time: 8:29 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" import="ch.ysyang.ecommerce.JDBConnection" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="blog.yisheng.bookstore.db.JDBConnection" %>
 <html>
 <head>
     <title>Search Result</title>
@@ -28,7 +28,7 @@
             String keyword = request.getParameter("keyword");
             System.out.print(keyword);
       JDBConnection con = new JDBConnection();
-      String sql = "select * from Book where BookName like '%"+keyword+"%' or Press like '%"+keyword+"%'";
+      String sql = "select * from Book where title like '%"+keyword+"%' or Press like '%"+keyword+"%'";
       ResultSet resultSet = con.executeQuery(sql);
       if(!resultSet.next()){
           out.print("No search results for "+ keyword);
