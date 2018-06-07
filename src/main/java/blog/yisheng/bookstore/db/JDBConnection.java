@@ -15,10 +15,11 @@ public class JDBConnection {
 
     public JDBConnection() {
         try {
+            Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection(url);
             conn.setAutoCommit(true);
             logger.info("Database connection established");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             logger.severe("Fail to establish Database connection");
             logger.severe(e.getMessage());
         }
@@ -46,8 +47,9 @@ public class JDBConnection {
         return resultSet;
     }
 
-    public PreparedStatement preparedStatement(String sql) {
+    public PreparedStatement prepareStatement(String sql) {
         PreparedStatement preparedStatement = null;
+        logger.info("Preparing statement " + sql);
         try {
             preparedStatement = conn.prepareStatement(sql);
         } catch (SQLException e) {

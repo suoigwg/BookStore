@@ -3,7 +3,6 @@ package blog.yisheng.bookstore.dao;
 import blog.yisheng.bookstore.db.JDBConnection;
 import blog.yisheng.bookstore.entity.Book;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -17,23 +16,22 @@ public class BookDAO {
         JDBConnection con = new JDBConnection();
         String sql = "select * from Book where ID = "+ s;
         Book book = new Book();
-        ResultSet resultSet = con.executeQuery(sql);
-//            System.out.print(resultSet.getString("BookName"));
-        try{
-            if (resultSet.next()){
-                book.setID(id);
-                book.setTitle(resultSet.getString("title"));
-                book.setAuthor(resultSet.getString("author"));
-                book.setISBN(resultSet.getString("isbn"));
-                book.setPress(resultSet.getString("press"));
-                book.setPrice(Double.parseDouble(resultSet.getString("price")));
-                book.setStock(Integer.parseInt(resultSet.getString("stock")));
-            }
-        }catch (Exception e){
-            System.out.print("Try block failed");
-            e.printStackTrace();
-        }
-        System.out.println(book.getTitle());
+//        ResultSet resultSet = con.executeQuery(sql);
+//        try{
+//            if (resultSet.next()){
+//                book.setID(id);
+//                book.setTitle(resultSet.getString("title"));
+//                book.setAuthor(resultSet.getString("author"));
+//                book.setISBN(resultSet.getInt("isbn"));
+//                book.setPress(resultSet.getString("press"));
+//                book.setPrice(Double.parseDouble(resultSet.getString("price")));
+//                book.setStock(Integer.parseInt(resultSet.getString("stock")));
+//            }
+//        }catch (Exception e){
+//            System.out.print("Try block failed");
+//            e.printStackTrace();
+//        }
+//        System.out.println(book.getTitle());
         return book;
     }
 

@@ -26,7 +26,7 @@ public class BookDAOImpl implements EntityDAO {
         String sql = "insert into Book (title, isbn, price, stock, press, author)" +
                 "values (?,?,?,?,?,?);";
         try {
-            PreparedStatement preparedStatement = conn.preparedStatement(sql);
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, book.getTitle());
             preparedStatement.setInt(2, book.getISBN());
             preparedStatement.setDouble(3, book.getPrice());
@@ -45,7 +45,7 @@ public class BookDAOImpl implements EntityDAO {
         Book book = (Book) obj;
         String sql = "delete from book where isbn = ?;";
         try {
-            PreparedStatement preparedStatement = conn.preparedStatement(sql);
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, book.getISBN());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -59,7 +59,7 @@ public class BookDAOImpl implements EntityDAO {
         String sql = "update book set title = ?, isbn = ?, price = ?," +
                 "stock = ?, press = ?, author = ? where isbn = ?";
         try {
-            PreparedStatement preparedStatement = conn.preparedStatement(sql);
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, book.getTitle());
             preparedStatement.setInt(2, book.getISBN());
             preparedStatement.setDouble(3, book.getPrice());
@@ -101,7 +101,7 @@ public class BookDAOImpl implements EntityDAO {
         String sql = "select * from book where id = ?;";
         Book book = null;
         try {
-            PreparedStatement preparedStatement = conn.preparedStatement(sql);
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.getFetchSize() == 0)

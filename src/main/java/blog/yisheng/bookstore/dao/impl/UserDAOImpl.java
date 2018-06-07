@@ -16,13 +16,17 @@ public class UserDAOImpl implements EntityDAO {
     private Logger logger = Logger.getLogger("blog.yisheng.bookstore.bookdaoimpl");
     private JDBConnection conn = null;
 
+    public UserDAOImpl() {
+        conn = new JDBConnection();
+    }
+
     @Override
     public void add(BaseEntity obj) {
         User user = (User) obj;
         String sql = "insert into user (username, password, email)" +
                 "values (?,?,?);";
         try {
-            PreparedStatement preparedStatement = conn.preparedStatement(sql);
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getEmail());
@@ -38,7 +42,7 @@ public class UserDAOImpl implements EntityDAO {
         User user = (User) obj;
         String sql = "delete from book where isbn = ?;";
         try {
-            PreparedStatement preparedStatement = conn.preparedStatement(sql);
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, user.getEmail());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -51,7 +55,7 @@ public class UserDAOImpl implements EntityDAO {
         User user = (User) obj;
         String sql = "update User set password = ? where email = ?";
         try {
-            PreparedStatement preparedStatement = conn.preparedStatement(sql);
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, user.getPassword());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.executeUpdate();
@@ -82,5 +86,33 @@ public class UserDAOImpl implements EntityDAO {
     @Override
     public BaseEntity retrieve(String id) throws Exception {
         throw new MethodNotImplemented();
+    }
+
+    public boolean isUserExist(User user) {
+        String sql = "select * from User where email = ? or username = ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, user.getEmail());
+            stmt.setString(2, user.getUsername());
+            ResultSet resultSet = stmt.executeQuery();
+            return resultSet.next();
+        } catch (SQLException e) {
+            logger.severe(e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean checkCredentials(User user) {
+        String sql = "select * from User where email = ? and password = ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, user.getEmail());
+            stmt.setString(2, user.getPassword());
+            ResultSet resultSet = stmt.executeQuery();
+            return resultSet.next();
+        } catch (SQLException e) {
+            logger.severe(e.getMessage());
+        }
+        return false;
     }
 }
