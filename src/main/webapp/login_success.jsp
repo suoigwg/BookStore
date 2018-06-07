@@ -5,7 +5,7 @@
   Time: 2:46 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Login Success!</title>
@@ -15,7 +15,7 @@
     <h1>Login Success!</h1>
     <h2>Welcome <%=session.getAttribute("username")%></h2>
     <%
-        request.getRequestDispatcher(request.getContextPath()+"index.jsp").forward(request,response);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     %>
 </body>
 </html>

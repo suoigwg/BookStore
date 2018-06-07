@@ -23,7 +23,7 @@ public class Register extends HttpServlet {
     }
 
     private boolean insertUserdata(String email, String password, String username){
-        String sql = "insert into User values ('"+email+"','"+password+"','"+username+"')";
+        String sql = "insert into User (username, password, email) values ('" + username + "','" + password + "','" + email + "')";
         JDBConnection con = new JDBConnection();
         return con.executeUpdate(sql) > 0;
     }
@@ -40,7 +40,7 @@ public class Register extends HttpServlet {
             if(insertUserdata(email,pw,username)){
                 out.println("Register success!");
                 out.print("An Email has been send to your mailbox at "+ email);
-                response.sendRedirect(request.getContextPath()+"index.jsp");
+                response.sendRedirect(request.getContextPath() + "/index.jsp");
             }
             else{
                 out.print("Register fail!");
@@ -49,6 +49,7 @@ public class Register extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        PrintWriter out = response.getWriter();
+        out.println("works");
     }
 }

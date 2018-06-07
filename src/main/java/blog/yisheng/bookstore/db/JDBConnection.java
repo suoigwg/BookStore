@@ -1,53 +1,47 @@
 package blog.yisheng.bookstore.db;
+
 import java.sql.*;
+
 /**
  * Created by ysyang on 10/12/2016.
  */
 
 
 public class JDBConnection {
-    private final String url = "jdbc:sqlite:bookstore.sqlite";
-    private Connection con = null;
+    private final static String url = "jdbc:sqlite:bookstore.sqlite";
+    private static Connection conn = null;
 
 
     public JDBConnection() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            System.out.print("Connection established!");
-        } catch (Exception ex) {
-            System.out.println("");
-        }
+
     }
 
-    private Connection createConnection() {
+    private static Connection createConnection() {
         try {
-            con = DriverManager.getConnection(url);
-            con.setAutoCommit(true);
-
+            conn = DriverManager.getConnection(url);
+            conn.setAutoCommit(true);
+            System.out.println("Connection established");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             System.out.println("createConnectionError!");
         }
-        return con;
+        return conn;
     }
 
-    public Connection getConnection(){
-        if (con == null){
+    public static Connection getConnection() {
+        if (conn == null) {
             createConnection();
-            return con;
         }
-        else{
-            return con;
-        }
+        return conn;
     }
 
-    public int executeUpdate(String sql) {
+    public static int executeUpdate(String sql) {
         int iCount;
-        if (con == null) {
+        if (conn == null) {
             createConnection();
         }
         try {
-            Statement stmt = con.createStatement();
+            Statement stmt = conn.createStatement();
             iCount = stmt.executeUpdate(sql);
             System.out.println("Affected row: " + String.valueOf(iCount));
             return iCount;
@@ -60,14 +54,14 @@ public class JDBConnection {
     }
 
 
-    public ResultSet executeQuery(String sql) {
+    public static ResultSet executeQuery(String sql) {
         ResultSet rs;
         System.out.println(sql);
         try {
-            if (con == null) {
+            if (conn == null) {
                 createConnection();
             }
-            Statement stmt = con.createStatement();
+            Statement stmt = conn.createStatement();
             try {
                 rs = stmt.executeQuery(sql);
             } catch (SQLException e) {
@@ -79,13 +73,16 @@ public class JDBConnection {
             System.out.println("executeQueryError!");
             return null;
         }
+        try {
+            System.out.println(rs.getFetchSize() + " record(s) retrieved");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return rs;
     }
 
 
-
-
-    public boolean isContained(String sql){
+    public boolean isContained(String sql) {
         ResultSet resultSet = executeQuery(sql);
         try {
             return resultSet.next();
@@ -96,14 +93,14 @@ public class JDBConnection {
     }
 
     public void closeConnection() {
-        if (con != null) {
+        if (conn != null) {
             try {
-                con.close();
+                conn.close();
             } catch (SQLException e) {
                 e.printStackTrace(); //To change body of catch statement use File | Settings | File Templates.
                 System.out.println("Failed to close connection!");
             } finally {
-                con = null;
+                conn = null;
             }
         }
     }

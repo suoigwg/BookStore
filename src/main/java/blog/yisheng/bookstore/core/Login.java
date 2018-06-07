@@ -15,30 +15,24 @@ import java.sql.*;
 /**
  * Created by ysyang on 10/12/2016.
  */
-@WebServlet(name = "blog.yisheng.bookstore.core.Login", urlPatterns = {"/login"})
+@WebServlet(name = "Login", urlPatterns = {"/login"})
 public class Login extends HttpServlet {
 
     private String username = "";
 
     boolean check(String email, String password) throws SQLException {
-
-        JDBConnection connection = new JDBConnection();
-        String sql = "SELECT * from User where email = \'"+email+"\' and password = \'"+password+"\';";
-        ResultSet resultSet = connection.executeQuery(sql);
-        if (!resultSet.next()){
+        String sql = "select password from user where email = '" + email + "'";
+        ResultSet resultSet = JDBConnection.executeQuery(sql);
+        if (resultSet.getString("password") == null)
             return false;
-        }
-        else {
-            username = resultSet.getString("UserName");
-            return true;
-        }
+        return resultSet.getString("password").equals(password);
     }
 
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         try {
-            if (check(email,password) == true){
+            if (check(email, password)) {
                 request.getSession().setAttribute("username",username);
                 request.getSession().setAttribute("email",email);
 

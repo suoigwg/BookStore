@@ -1,6 +1,7 @@
 <%@ page import="blog.yisheng.bookstore.entity.Book" %>
 <%@ page import="blog.yisheng.bookstore.dao.BookDAO" %>
 <%@ page import="java.util.*" %>
+<%@ page import="blog.yisheng.bookstore.entity.Cart" %>
 <%--
   Created by IntelliJ IDEA.
   User: ysyang

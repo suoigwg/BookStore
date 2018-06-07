@@ -5,7 +5,7 @@
   Time: 9:06 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Title</title>
@@ -13,7 +13,7 @@
 <%
     session.invalidate();
     out.print("You've successfully log out!");
-    response.sendRedirect(request.getContextPath()+"index.jsp");
+    response.sendRedirect("index.jsp");
 %>
 <body>
 

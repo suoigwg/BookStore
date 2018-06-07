@@ -5,7 +5,7 @@
   Time: 2:16 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Register</title>
@@ -18,7 +18,7 @@
 
 <h1 class="text-center">欢迎</h1>
 <div id="loginForm">
-    <form method="post" action="/register">
+    <form method="post" action="register">
         <form>
             <div class="form-group">
                 <label>您的姓名</label>

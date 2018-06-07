@@ -5,7 +5,7 @@
   Time: 2:14 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
@@ -18,7 +18,7 @@
 
 <h1 class="text-center">欢迎</h1>
 <div id="loginForm">
-    <form method="post" action="/login">
+    <form method="post" action="login">
         <form>
             <div class="form-group">
                 <label for="exampleInputEmail1">邮件地址</label>

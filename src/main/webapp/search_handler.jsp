@@ -7,6 +7,8 @@
 --%>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="blog.yisheng.bookstore.db.JDBConnection" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+
 <html>
 <head>
     <title>Search Result</title>
@@ -27,13 +29,13 @@
             request.setCharacterEncoding("utf-8");
             String keyword = request.getParameter("keyword");
             System.out.print(keyword);
-      JDBConnection con = new JDBConnection();
-      String sql = "select * from Book where title like '%"+keyword+"%' or Press like '%"+keyword+"%'";
-      ResultSet resultSet = con.executeQuery(sql);
-      if(!resultSet.next()){
-          out.print("No search results for "+ keyword);
-      }
-      else {
+              JDBConnection con = new JDBConnection();
+              String sql = "select * from Book where title like '%"+keyword+"%' or Press like '%"+keyword+"%'";
+              ResultSet resultSet = con.executeQuery(sql);
+              if(resultSet.getFetchSize() == 0){
+                  out.println("找不到与"+keyword+"相关的搜索结果");
+              }
+              else {
           %>
         <tr>
             <td><strong>Title</strong></td>
@@ -43,11 +45,10 @@
             <%
 
       }
-      resultSet.beforeFirst();
       while (resultSet.next()){
     %>
         <tr>
-            <td><a href="detail.jsp?id=<%=resultSet.getString("ID")%>"><%=resultSet.getString("BookName")%>
+            <td><a href="detail.jsp?id=<%=resultSet.getString("ID")%>"><%=resultSet.getString("title")%>
             </a></td>
             <td><%=resultSet.getString("Price")%>
             </td>

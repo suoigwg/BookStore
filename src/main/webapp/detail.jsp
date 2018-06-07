@@ -49,7 +49,7 @@
     <div class="row">
         <hr>
         <div class="col-lg-6 col-md-6 col-sm-6">
-            <h1><%=resultSet.getString("BookName")%>
+            <h1><%=resultSet.getString("title")%>
             </h1>
             <form action="/cartservlet" method="get">
                 <input hidden="hidden" value="<%=resultSet.getString("ID")%>" name="bookid">
@@ -57,7 +57,7 @@
                 <br><br><br>
                 <p>Price: <%=resultSet.getString("Price")%>
                 </p>
-                <p>Amount: <%=resultSet.getString("Amount")%>
+                <p>Amount: <%=resultSet.getString("stock")%>
                 </p>
                 <p>Press: <%=resultSet.getString("Press")%>
                 </p>

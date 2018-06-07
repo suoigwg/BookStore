@@ -28,7 +28,7 @@ public class BookDAO {
                 book.setISBN(resultSet.getString("isbn"));
                 book.setPress(resultSet.getString("press"));
                 book.setPrice(Double.parseDouble(resultSet.getString("price")));
-                book.setAmount(Integer.parseInt(resultSet.getString("amount")));
+                book.setAmount(Integer.parseInt(resultSet.getString("stock")));
             }
         }catch (Exception e){
             System.out.print("Try block failed");

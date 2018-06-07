@@ -82,7 +82,7 @@
 <%--</table>--%>
 <%--</form>--%>
 
-<form class="form-inline" action="/order" method="post">
+<form class="form-inline" action="order" method="post">
     <div class="form-group">
         <label for="exampleInputEmail1">收件人</label>
         <input class="form-control" id="exampleInputEmail1" placeholder="" name="receiver">
