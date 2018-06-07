@@ -1,4 +1,4 @@
-package blog.yisheng.bookstore.core;
+package blog.yisheng.bookstore.entity;
 
 import blog.yisheng.bookstore.entity.Book;
 

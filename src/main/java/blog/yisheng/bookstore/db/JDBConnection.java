@@ -1,6 +1,7 @@
 package blog.yisheng.bookstore.db;
 
 import java.sql.*;
+import java.util.logging.Logger;
 
 /**
  * Created by ysyang on 10/12/2016.
@@ -8,102 +9,67 @@ import java.sql.*;
 
 
 public class JDBConnection {
-    private final static String url = "jdbc:sqlite:bookstore.sqlite";
-    private static Connection conn = null;
-
+    private final String url = "jdbc:sqlite:bookstore.sqlite";
+    private Connection conn = null;
+    Logger logger = Logger.getLogger("blog.yisheng.bookstore.db.jdbc");
 
     public JDBConnection() {
-
-    }
-
-    private static Connection createConnection() {
         try {
             conn = DriverManager.getConnection(url);
             conn.setAutoCommit(true);
-            System.out.println("Connection established");
+            logger.info("Database connection established");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            System.out.println("createConnectionError!");
+            logger.severe("Fail to establish Database connection");
+            logger.severe(e.getMessage());
         }
+    }
+
+
+    public Connection getConnection() {
         return conn;
     }
 
-    public static Connection getConnection() {
-        if (conn == null) {
-            createConnection();
-        }
-        return conn;
-    }
-
-    public static int executeUpdate(String sql) {
-        int iCount;
-        if (conn == null) {
-            createConnection();
-        }
-        try {
-            Statement stmt = conn.createStatement();
-            iCount = stmt.executeUpdate(sql);
-            System.out.println("Affected row: " + String.valueOf(iCount));
-            return iCount;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            System.out.println("executeUpdaterError!");
-            return 0;
-        }
-
+    public int executeUpdate(String sql) throws SQLException {
+        logger.info("Executing " + sql);
+        Statement stmt = conn.createStatement();
+        int affectRows = stmt.executeUpdate(sql);
+        logger.info(affectRows + " rows affected");
+        return affectRows;
     }
 
 
-    public static ResultSet executeQuery(String sql) {
-        ResultSet rs;
-        System.out.println(sql);
-        try {
-            if (conn == null) {
-                createConnection();
-            }
-            Statement stmt = conn.createStatement();
-            try {
-                rs = stmt.executeQuery(sql);
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                return null;
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            System.out.println("executeQueryError!");
-            return null;
-        }
-        try {
-            System.out.println(rs.getFetchSize() + " record(s) retrieved");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return rs;
+    public ResultSet executeQuery(String sql) throws SQLException {
+        Statement stmt = conn.createStatement();
+        ResultSet resultSet = stmt.executeQuery(sql);
+        logger.info("Executing " + sql);
+        logger.info(resultSet.getFetchSize() + " record(s) affected");
+        return resultSet;
     }
 
-
-    public boolean isContained(String sql) {
-        ResultSet resultSet = executeQuery(sql);
+    public PreparedStatement preparedStatement(String sql) {
+        PreparedStatement preparedStatement = null;
         try {
-            return resultSet.next();
+            preparedStatement = conn.prepareStatement(sql);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.severe("Fail to prepare statement " + sql);
+            logger.severe(e.getMessage());
         }
-        return false;
+        return preparedStatement;
     }
 
-    public void closeConnection() {
+    @Override
+    protected void finalize() {
         if (conn != null) {
             try {
                 conn.close();
             } catch (SQLException e) {
-                e.printStackTrace(); //To change body of catch statement use File | Settings | File Templates.
-                System.out.println("Failed to close connection!");
-            } finally {
-                conn = null;
+                logger.severe("Error closing db connection");
+                logger.severe(e.getMessage());
             }
         }
+        conn = null;
     }
+
 
 }
 

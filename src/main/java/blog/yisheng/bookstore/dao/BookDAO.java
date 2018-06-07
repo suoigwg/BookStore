@@ -6,7 +6,6 @@ import blog.yisheng.bookstore.entity.Book;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by ysyang on 12/12/2016.
@@ -23,18 +22,18 @@ public class BookDAO {
         try{
             if (resultSet.next()){
                 book.setID(id);
-                book.setBookName(resultSet.getString("title"));
+                book.setTitle(resultSet.getString("title"));
                 book.setAuthor(resultSet.getString("author"));
                 book.setISBN(resultSet.getString("isbn"));
                 book.setPress(resultSet.getString("press"));
                 book.setPrice(Double.parseDouble(resultSet.getString("price")));
-                book.setAmount(Integer.parseInt(resultSet.getString("stock")));
+                book.setStock(Integer.parseInt(resultSet.getString("stock")));
             }
         }catch (Exception e){
             System.out.print("Try block failed");
             e.printStackTrace();
         }
-        System.out.println(book.getBookName());
+        System.out.println(book.getTitle());
         return book;
     }
 
@@ -53,7 +52,7 @@ public class BookDAO {
     }
     public static void main(String args[]){
         Book b = getElementByID("1");
-        System.out.print(b.getBookName());
+        System.out.print(b.getTitle());
     }
 }
 

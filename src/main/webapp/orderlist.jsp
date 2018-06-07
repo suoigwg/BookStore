@@ -48,7 +48,7 @@
                     ResultSet bookList = con.executeQuery(checkBookid);
                     while (bookList.next()) {
                         int bid = bookList.getInt("bookid");
-                        int amount = bookList.getInt("amount");
+                        int stock = bookList.getInt("stock");
                         String checkBookDetail = "select * from book where ID =" + bid;
                         ResultSet bookInfo = con.executeQuery(checkBookDetail);
                         while (bookInfo.next()) {
@@ -61,7 +61,7 @@
                     </td>
                     <td><%=bookInfo.getDouble("Price")%>
                     </td>
-                    <td><%=amount%>
+                    <td><%=stock%>
                     </td>
 
                 </tr>

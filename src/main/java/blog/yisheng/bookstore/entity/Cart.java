@@ -73,7 +73,7 @@ public class Cart {
         while (bit.hasNext()){
             Book b = bit.next();
             Integer amt = ait.next();
-            System.out.print(b.getBookName());
+            System.out.print(b.getTitle());
             System.out.print(amt);
         }
     }

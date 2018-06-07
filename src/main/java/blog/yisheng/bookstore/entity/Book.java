@@ -4,9 +4,9 @@ package blog.yisheng.bookstore.entity;
  * Created by ysyang on 11/12/2016.
  */
 
-public class Book {
-    private int ID, Amount;
-    private String BookName, ISBN, Press, Author;
+public class Book extends BaseEntity {
+    private int ID, stock, ISBN;
+    private String title, Press, Author;
     private double Price;
 
     public Book() {
@@ -20,27 +20,27 @@ public class Book {
         this.ID = ID;
     }
 
-    public int getAmount() {
-        return Amount;
+    public int getStock() {
+        return stock;
     }
 
-    public void setAmount(int amount) {
-        Amount = amount;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
-    public String getBookName() {
-        return BookName;
+    public String getTitle() {
+        return title;
     }
 
-    public void setBookName(String bookName) {
-        BookName = bookName;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getISBN() {
+    public int getISBN() {
         return ISBN;
     }
 
-    public void setISBN(String ISBN) {
+    public void setISBN(int ISBN) {
         this.ISBN = ISBN;
     }
 

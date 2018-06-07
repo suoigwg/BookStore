@@ -3,7 +3,7 @@ package blog.yisheng.bookstore.entity;
 /**
  * Created by ysyang on 11/12/2016.
  */
-public class User {
+public class User extends BaseEntity {
     private String email = "";
     private String password = "";
     private String username = "";

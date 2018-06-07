@@ -55,7 +55,7 @@
                                 if (b != null) {
                     %>
                     <ul>
-                        <li><a href="detail.jsp?id=<%=b.getID()%>"><%=b.getBookName()%>
+                        <li><a href="detail.jsp?id=<%=b.getID()%>"><%=b.getTitle()%>
                         </a></li>
                     </ul>
                     <% }
@@ -107,7 +107,7 @@
                 Integer amt = ait.next();
         %>
         <tr>
-            <td><%=b.getBookName()%>
+            <td><%=b.getTitle()%>
             </td>
             <td><%=b.getPrice()%>
             </td>

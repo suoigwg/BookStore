@@ -42,7 +42,7 @@
                 Integer amt = ait.next();
         %>
         <tr>
-            <td>书名:   <%=b.getBookName()%>
+            <td>书名:   <%=b.getTitle()%>
             </td>
             <td>价格:      <%=b.getPrice()%>
             </td>

@@ -23,7 +23,7 @@
             <tr>ISBN:       <input type="text" size="30" name="isbn" value="111111111"></tr><br>
         <tr>价格: <input type="text" name="price" value="10"></tr>
         <br>
-        <tr>数目: <input type="text" name="amount" value="10"></tr>
+        <tr>数目: <input type="text" name="stock" value="10"></tr>
         <br>
         <tr>出版社: <input type="text" name="press" size="45" value="TestPress"></tr>
         <br>

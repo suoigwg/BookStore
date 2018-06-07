@@ -86,7 +86,7 @@
                     if (b != null) {
         %>
         <ul>
-            <li><a href="detail.jsp?id=<%=b.getID()%>"><%=b.getBookName()%>
+            <li><a href="detail.jsp?id=<%=b.getID()%>"><%=b.getTitle()%>
             </a></li>
         </ul>
         <% }

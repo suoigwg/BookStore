@@ -45,7 +45,8 @@
                 Book b = bookListIterator.next();
         %>
         <tr>
-            <td><%=b.getBookName()%></td>
+            <td><%=b.getTitle()%>
+            </td>
             <td><%=b.getPrice()%></td>
             <td><%=b.getPress()%></td>
             <td><%=amountIterator.next()%></td>
