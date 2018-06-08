@@ -5,7 +5,6 @@ import blog.yisheng.bookstore.db.ConnectionFactory;
 import blog.yisheng.bookstore.db.JDBConnection;
 import blog.yisheng.bookstore.entity.BaseEntity;
 import blog.yisheng.bookstore.entity.Order;
-import blog.yisheng.bookstore.entity.User;
 import blog.yisheng.bookstore.exception.MethodNotImplemented;
 
 import java.sql.PreparedStatement;
@@ -86,12 +85,12 @@ public class OrderDAOImpl implements EntityDAO {
         throw new MethodNotImplemented();
     }
 
-    public ArrayList<Order> listOrders(User user) {
-        String sql = "select * from order where username = ?";
+    public ArrayList<Order> listOrders(String username) {
+        String sql = "select * from Orders where username = ?";
         ArrayList<Order> orderList = new ArrayList<Order>();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, user.getUsername());
+            stmt.setString(1, username);
             ResultSet resultSet = stmt.executeQuery();
             orderList = orderSerializer(resultSet);
         } catch (SQLException e) {
@@ -101,7 +100,7 @@ public class OrderDAOImpl implements EntityDAO {
     }
 
     public int getRecentOrderID(String username, Date date) {
-        String sql = "select * from order where username = ? and date = ?";
+        String sql = "select * from Orders where username = ? and date = ?";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, username);

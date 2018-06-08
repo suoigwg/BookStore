@@ -31,6 +31,7 @@
                     } else {
                         User user = (User) session.getAttribute("user");
                         out.print(user);
+                        out.print("<a href=\"logout\">退出</a>&nbsp;");
                     }
                 %>
                 <a href="manage.jsp" hidden="hidden">管理</a>&nbsp;&nbsp;

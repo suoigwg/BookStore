@@ -22,19 +22,22 @@
 <jsp:include page="navbar.jsp"></jsp:include>
 <div class="container">
     <%
-        Object c = session.getAttribute("cart");
-        Cart cart = null;
-        cart = c == null ? new Cart() : (Cart) c;
-        if (cart.isEmpty()) {
-            out.println("<h1>您的购物车是空的</h1>");
+        if (session.getAttribute("user") == null) {
+            out.println("<h1>您尚未登录</h1>");
         } else {
-            HashMap<Book, Integer> itemList = cart.getCartItems();
-            for (Map.Entry<Book, Integer> item : itemList.entrySet()) {
-                out.print(item.getKey().getTitle() + ":");
-                out.print(item.getValue());
+            Object c = session.getAttribute("cart");
+            Cart cart = null;
+            cart = c == null ? new Cart() : (Cart) c;
+            if (cart.isEmpty()) {
+                out.println("<h1>您的购物车是空的</h1>");
+            } else {
+                HashMap<Book, Integer> itemList = cart.getCartItems();
+                for (Map.Entry<Book, Integer> item : itemList.entrySet()) {
+                    out.print(item.getKey().getTitle() + ":");
+                    out.print(item.getValue());
+                }
             }
         }
-
     %>
 
 </div>
