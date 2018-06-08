@@ -1,21 +1,17 @@
 package blog.yisheng.bookstore.entity;
 
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
 
 /**
  * Created by ysyang on 12/12/2016.
  */
-public class Cart {
+public class Cart extends BaseEntity {
     private HashMap<Book, Integer> cartItems = null;
+    private double totalPrice = 0;
 
     public HashMap<Book, Integer> getCartItems() {
         return cartItems;
     }
-
-    private double totalPrice = 0;
 
     public double getTotalPrice() {
         return totalPrice;
@@ -26,55 +22,36 @@ public class Cart {
         totalPrice = 0;
     }
 
-    public boolean addItem(Book b, Integer amount){
-        if (cartItems == null){
-            cartItems = new HashMap<Book, Integer>();
-        }
-        Integer amt = cartItems.get(b);
-        if (cartItems.containsKey(b)){
-            amt += amount;
-            totalPrice += b.getPrice()*amount;
-            cartItems.put(b,amt);
-        }
-        else {
-            totalPrice += b.getPrice()*amount;
-            cartItems.put(b,amount);
+    public boolean addItem(Book book, Integer amount) {
+        if (cartItems.containsKey(book)) {
+            totalPrice += book.getPrice() * amount;
+            cartItems.put(book, cartItems.get(book) + amount);
+        } else {
+            totalPrice += book.getPrice() * amount;
+            cartItems.put(book, amount);
         }
         return true;
     }
 
-    public boolean removeItem(Book b, Integer amount){
-        if (cartItems == null){
-            return false;
-        }
-        if (cartItems.containsKey(b)){
-            Integer amt = cartItems.get(b);
-            if (amt > amount){
-                amt -= amount;
-                totalPrice -= b.getPrice()*amount;
-                cartItems.put(b,amt);
-            }
-            else{
-                totalPrice -=b.getPrice()*amt;
+    public boolean removeItem(Book b, Integer amount) {
+        if (cartItems.containsKey(b)) {
+            Integer currentAmount = cartItems.get(b);
+            if (currentAmount > amount) {
+                currentAmount -= amount;
+                totalPrice -= b.getPrice() * amount;
+                cartItems.put(b, currentAmount);
+            } else {
+                totalPrice -= b.getPrice() * currentAmount;
                 cartItems.remove(b);
             }
-        }
-        else {
+        } else {
             return false;
         }
         return true;
     }
 
-    public void printItemList(){
-        Set<Book> booklist = cartItems.keySet();
-        Collection<Integer> amountlist = cartItems.values();
-        Iterator<Integer> ait = amountlist.iterator();
-        Iterator<Book> bit = booklist.iterator();
-        while (bit.hasNext()){
-            Book b = bit.next();
-            Integer amt = ait.next();
-            System.out.print(b.getTitle());
-            System.out.print(amt);
-        }
+    public void clear() {
+        cartItems.clear();
     }
+
 }

@@ -27,7 +27,7 @@
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">邮件地址</label>
-                <input value="admin@1.com" name="email" type="email" class="form-control" id="exampleInputEmail1"
+                <input value="admin@1.com" name="username" type="username" class="form-control" id="exampleInputEmail1"
                        placeholder="">
             </div>
             <div class="form-group">

@@ -1,7 +1,7 @@
-<%@ page import="blog.yisheng.bookstore.entity.Book" %>
 <%@ page import="blog.yisheng.bookstore.dao.BookDAO" %>
-<%@ page import="java.util.*" %>
+<%@ page import="blog.yisheng.bookstore.entity.Book" %>
 <%@ page import="blog.yisheng.bookstore.entity.Cart" %>
+<%@ page import="java.util.*" %>
 <%--
   Created by IntelliJ IDEA.
   User: ysyang
@@ -65,7 +65,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6" align="center">
                     <%
-                        if (session.getAttribute("email") == null) {
+                        if (session.getAttribute("username") == null) {
                     %>
                     <p class="text-center">注册以获得更好体验</p>
                     <a href="login.jsp">

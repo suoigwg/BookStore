@@ -34,7 +34,6 @@ public class UserDAOImpl implements EntityDAO {
         } catch (SQLException e) {
             logger.severe(e.getMessage());
         }
-
     }
 
     @Override

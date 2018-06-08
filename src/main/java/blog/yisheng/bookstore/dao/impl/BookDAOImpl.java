@@ -100,17 +100,7 @@ public class BookDAOImpl implements EntityDAO {
         ArrayList<Book> bookList = new ArrayList<Book>();
         try {
             ResultSet resultSet = conn.executeQuery(sql);
-            while (resultSet.next()) {
-                Book book = new Book();
-                book.setTitle(resultSet.getString("title"));
-                book.setAuthor(resultSet.getString("author"));
-                book.setISBN(resultSet.getInt("isbn"));
-                book.setPress(resultSet.getString("press"));
-                book.setPrice(resultSet.getDouble("price"));
-                book.setStock(resultSet.getInt("stock"));
-                book.setID(resultSet.getInt("id"));
-                bookList.add(book);
-            }
+            bookList = bookSerializer(resultSet);
         } catch (SQLException e) {
             logger.severe(e.getMessage());
         }
