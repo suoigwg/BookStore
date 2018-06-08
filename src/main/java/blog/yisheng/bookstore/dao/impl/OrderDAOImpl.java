@@ -1,6 +1,7 @@
 package blog.yisheng.bookstore.dao.impl;
 
 import blog.yisheng.bookstore.dao.EntityDAO;
+import blog.yisheng.bookstore.db.ConnectionFactory;
 import blog.yisheng.bookstore.db.JDBConnection;
 import blog.yisheng.bookstore.entity.BaseEntity;
 import blog.yisheng.bookstore.entity.Order;
@@ -14,8 +15,12 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class OrderDAOImpl implements EntityDAO {
-    private Logger logger = Logger.getLogger("blog.yisheng.bookstore.bookdaoimpl");
+    private Logger logger = Logger.getLogger("blog.yisheng.bookstore.orderdaoimpl");
     private JDBConnection conn = null;
+
+    public OrderDAOImpl() {
+        conn = ConnectionFactory.getConnection();
+    }
 
     private ArrayList<Order> orderSerializer(ResultSet resultSet) {
         ArrayList<Order> orderList = new ArrayList<Order>();
@@ -36,9 +41,6 @@ public class OrderDAOImpl implements EntityDAO {
         return orderList;
     }
 
-    public OrderDAOImpl() {
-        conn = new JDBConnection();
-    }
 
     @Override
     public void add(BaseEntity obj) {

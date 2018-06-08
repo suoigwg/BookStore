@@ -26,10 +26,6 @@ public class JDBConnection {
     }
 
 
-    public Connection getConnection() {
-        return conn;
-    }
-
     public int executeUpdate(String sql) throws SQLException {
         logger.info("Executing " + sql);
         Statement stmt = conn.createStatement();

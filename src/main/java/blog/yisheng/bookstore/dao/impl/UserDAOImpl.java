@@ -1,6 +1,7 @@
 package blog.yisheng.bookstore.dao.impl;
 
 import blog.yisheng.bookstore.dao.EntityDAO;
+import blog.yisheng.bookstore.db.ConnectionFactory;
 import blog.yisheng.bookstore.db.JDBConnection;
 import blog.yisheng.bookstore.entity.BaseEntity;
 import blog.yisheng.bookstore.entity.User;
@@ -17,7 +18,7 @@ public class UserDAOImpl implements EntityDAO {
     private JDBConnection conn = null;
 
     public UserDAOImpl() {
-        conn = new JDBConnection();
+        conn = ConnectionFactory.getConnection();
     }
 
     @Override

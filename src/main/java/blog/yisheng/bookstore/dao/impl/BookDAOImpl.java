@@ -1,6 +1,7 @@
 package blog.yisheng.bookstore.dao.impl;
 
 import blog.yisheng.bookstore.dao.EntityDAO;
+import blog.yisheng.bookstore.db.ConnectionFactory;
 import blog.yisheng.bookstore.db.JDBConnection;
 import blog.yisheng.bookstore.entity.BaseEntity;
 import blog.yisheng.bookstore.entity.Book;
@@ -17,7 +18,7 @@ public class BookDAOImpl implements EntityDAO {
     private JDBConnection conn = null;
 
     public BookDAOImpl() {
-        conn = new JDBConnection();
+        conn = ConnectionFactory.getConnection();
     }
 
     private ArrayList<Book> bookSerializer(ResultSet resultSet) {
@@ -110,14 +111,13 @@ public class BookDAOImpl implements EntityDAO {
     @Override
     public BaseEntity retrieve(String id) throws EntityNotFoundException {
         String sql = "select * from book where id = ?;";
+
         Book book = null;
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, id);
+            preparedStatement.setInt(1, Integer.parseInt(id));
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.getFetchSize() == 0)
-                throw new EntityNotFoundException("Book with id " + id + " not found!");
-            while (resultSet.next()) {
+            if (resultSet.next()) {
                 book = new Book();
                 book.setTitle(resultSet.getString("title"));
                 book.setAuthor(resultSet.getString("author"));
@@ -126,6 +126,8 @@ public class BookDAOImpl implements EntityDAO {
                 book.setPrice(resultSet.getDouble("price"));
                 book.setStock(resultSet.getInt("stock"));
                 book.setID(resultSet.getInt("id"));
+            } else {
+                throw new EntityNotFoundException("Book with id " + id + " not found!");
             }
         } catch (SQLException e) {
             logger.severe(e.getMessage());

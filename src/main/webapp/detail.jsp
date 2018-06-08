@@ -1,8 +1,8 @@
-<%@ page import="java.sql.ResultSet" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="blog.yisheng.bookstore.dao.BookDAO" %>
+<%@ page import="blog.yisheng.bookstore.db.JDBConnection" %>
 <%@ page import="blog.yisheng.bookstore.entity.Book" %>
-<%@ page import="blog.yisheng.bookstore.db.JDBConnection" %><%--
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: ysyang
   Date: 12/12/2016
@@ -51,8 +51,8 @@
         <div class="col-lg-6 col-md-6 col-sm-6">
             <h1><%=resultSet.getString("title")%>
             </h1>
-            <form action="/cartservlet" method="get">
-                <input hidden="hidden" value="<%=resultSet.getString("ID")%>" name="bookid">
+            <form action="cart" method="get">
+                <input hidden="hidden" value="<%=resultSet.getString("ID")%>" name="id">
                 <input hidden="hidden" name="action" value="add">
                 <br><br><br>
                 <p>Price: <%=resultSet.getString("Price")%>
@@ -63,7 +63,7 @@
                 </p>
                 <p>Author: <%=resultSet.getString("Author")%>
                 </p>
-                <p>Buy: <input type="number" id="buyamount" value="1" name="buyamount"></p>
+                <p>Buy: <input type="number" id="amount" value="1" name="amount"></p>
                 <button type="submit" class="btn btn-success">Add to cart</button>
             </form>
 

@@ -8,6 +8,7 @@ import java.util.HashMap;
 public class Cart extends BaseEntity {
     private HashMap<Book, Integer> cartItems = null;
     private double totalPrice = 0;
+    private String username;
 
     public HashMap<Book, Integer> getCartItems() {
         return cartItems;
@@ -17,12 +18,20 @@ public class Cart extends BaseEntity {
         return totalPrice;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public Cart() {
         cartItems = new HashMap<Book, Integer>();
         totalPrice = 0;
     }
 
-    public boolean addItem(Book book, Integer amount) {
+    public void addItem(Book book, Integer amount) {
         if (cartItems.containsKey(book)) {
             totalPrice += book.getPrice() * amount;
             cartItems.put(book, cartItems.get(book) + amount);
@@ -30,10 +39,9 @@ public class Cart extends BaseEntity {
             totalPrice += book.getPrice() * amount;
             cartItems.put(book, amount);
         }
-        return true;
     }
 
-    public boolean removeItem(Book b, Integer amount) {
+    public void removeItem(Book b, Integer amount) {
         if (cartItems.containsKey(b)) {
             Integer currentAmount = cartItems.get(b);
             if (currentAmount > amount) {
@@ -44,10 +52,7 @@ public class Cart extends BaseEntity {
                 totalPrice -= b.getPrice() * currentAmount;
                 cartItems.remove(b);
             }
-        } else {
-            return false;
         }
-        return true;
     }
 
     public void clear() {
