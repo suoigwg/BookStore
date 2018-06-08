@@ -1,6 +1,8 @@
 package blog.yisheng.bookstore.servlet;
 
+import blog.yisheng.bookstore.dao.impl.CartDAOImpl;
 import blog.yisheng.bookstore.dao.impl.UserDAOImpl;
+import blog.yisheng.bookstore.entity.Cart;
 import blog.yisheng.bookstore.entity.User;
 
 import javax.servlet.ServletException;
@@ -26,8 +28,14 @@ public class Login extends HttpServlet {
         User newUser = new User(req.getParameter("username"), req.getParameter("password"), "");
         if (userDAO.checkCredentials(newUser)) {
             req.getSession().setAttribute("user", newUser);
+            CartDAOImpl cartDAO = new CartDAOImpl();
+            try {
+                Cart cart = (Cart) cartDAO.retrieve(newUser.getUsername());
+                req.getSession().setAttribute("cart", cart);
+            } catch (Exception e) {
+                out.print(e.getMessage());
+            }
             req.getRequestDispatcher("login_success.jsp").forward(req, resp);
-            req.getSession().setAttribute("user", newUser);
             out.println("login success");
         } else {
             out.println("bad credentials");

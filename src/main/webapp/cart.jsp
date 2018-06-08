@@ -36,9 +36,11 @@
                     out.print(item.getKey().getTitle() + ":");
                     out.print(item.getValue());
                 }
+                out.print("<h1>总金额为:</h1>" + cart.getTotalPrice());
             }
         }
     %>
+    <a href="place_order.jsp"><h2>提交订单</h2></a>
 
 </div>
 

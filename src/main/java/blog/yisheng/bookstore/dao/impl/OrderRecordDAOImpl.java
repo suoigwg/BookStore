@@ -8,17 +8,35 @@ import blog.yisheng.bookstore.entity.OrderRecord;
 import blog.yisheng.bookstore.exception.MethodNotImplemented;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class OrderRecordDAOImpl implements EntityDAO {
     private Logger logger = Logger.getLogger("blog.yisheng.bookstore.bookdaoimpl");
     private JDBConnection conn = null;
 
+    private ArrayList<OrderRecord> recordSerializer(ResultSet resultSet) {
+        ArrayList<OrderRecord> orderRecords = new ArrayList<OrderRecord>();
+        try {
+            while (resultSet.next()) {
+                OrderRecord record = new OrderRecord();
+                record.setId(resultSet.getInt("id"));
+                record.setAmount(resultSet.getInt("amount"));
+                record.setOrderID(resultSet.getInt("orderid"));
+            }
+        } catch (SQLException e) {
+            logger.severe(e.getMessage());
+        }
+        return orderRecords;
+    }
+
     public OrderRecordDAOImpl() {
         logger = Logger.getLogger("blog.yisheng.bookstore.bookdaoimpl");
         conn = ConnectionFactory.getConnection();
     }
+
 
     @Override
     public void add(BaseEntity obj) {
@@ -49,5 +67,19 @@ public class OrderRecordDAOImpl implements EntityDAO {
     @Override
     public BaseEntity retrieve(String id) throws Exception {
         throw new MethodNotImplemented();
+    }
+
+    public ArrayList<OrderRecord> getOrderDetail(int orderid) {
+        ArrayList<OrderRecord> orderRecords = new ArrayList<OrderRecord>();
+        String sql = "select * from orderdetail where orderid = ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, orderid);
+            ResultSet resultSet = stmt.executeQuery();
+            orderRecords = recordSerializer(resultSet);
+        } catch (SQLException e) {
+            logger.severe(e.getMessage());
+        }
+        return orderRecords;
     }
 }

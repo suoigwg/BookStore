@@ -1,16 +1,14 @@
 <%@ page import="blog.yisheng.bookstore.entity.Book" %>
 <%@ page import="blog.yisheng.bookstore.entity.Cart" %>
-<%@ page import="java.util.Collection" %>
 <%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Iterator" %>
-<%@ page import="java.util.Set" %><%--
+<%@ page import="java.util.Map" %><%--
   Created by IntelliJ IDEA.
   User: ysyang
   Date: 12/12/2016
   Time: 8:05 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
@@ -19,52 +17,28 @@
     <script src="js/bootstrap.min.js"></script>
     <title>我的订单</title>
 </head>
+<h1></h1>
 <body>
-<h1>请确认您的订单</h1>
-<table class="table table-hover">
-    <%
-        request.setCharacterEncoding("utf-8");
-        if (session.getAttribute("cart") == null) {
-    %>
-    <h3>您的购物车为空</h3>
-    <%
-    } else {
-        Cart c = (Cart) session.getAttribute("cart");
-        c.printItemList();
-        HashMap<Book, Integer> itemlist = c.getCartItems();
-        Set<Book> booklist = itemlist.keySet();
-        Collection<Integer> amountlist = itemlist.values();
-        Iterator<Integer> ait = amountlist.iterator();
-        Iterator<Book> bit = booklist.iterator();
-        while (ait.hasNext() && bit.hasNext()) {
-            Book b = bit.next();
-            Integer amt = ait.next();
-    %>
-    <tr>
-        <td>书名:   <%=b.getTitle()%>
-        </td>
-        <td>价格:      <%=b.getPrice()%>
-        </td>
-        <td>出版社:      <%=b.getPress()%>
-        </td>
-        <td>作者:     <%=b.getAuthor()%>
-        </td>
-        <td>数目:     <%=amt%>
-        </td>
 
-    </tr>
     <%
+        if (request.getSession().getAttribute("cart") == null) {
+            out.print("<h1>请先登录</h1>");
+        } else {
+            Cart cart = (Cart) request.getSession().getAttribute("cart");
+            if (cart.isEmpty()) {
+                out.println("<h1>您的购物车是空的</h1>");
+            } else {
+                HashMap<Book, Integer> itemList = cart.getCartItems();
+                for (Map.Entry<Book, Integer> item : itemList.entrySet()) {
+                    out.print(item.getKey().getTitle() + ":");
+                    out.print(item.getValue());
+                }
+                out.print("<h1>总金额为:</h1>" + cart.getTotalPrice());
+            }
         }
-    %>
-    <tr>
-        <td>Total Price: <%=c.getTotalPrice()%>
-        </td>
-    </tr>
-    <%
-        }
+
     %>
 
-</table>
 <h1>请确认您的收货地址</h1>
 
 <form class="form-inline" action="order" method="post">

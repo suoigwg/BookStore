@@ -29,18 +29,16 @@
             } else {
                 User user = (User) session.getAttribute("user");
                 OrderDAOImpl orderDAO = new OrderDAOImpl();
-                System.out.print("======" + user.getUsername());
                 ArrayList<Order> orders = orderDAO.listOrders(user.getUsername());
                 if (orders.size() == 0) {
                     out.print("<h1>您没有订单记录</h1>");
                 } else {
                     for (Order order : orders) {
-                        out.print("<h4>" + order.getOrderID() + "</h4>");
+                        out.print("<a href=orderdetail.jsp?id=" + order.getOrderID() + "><h4>" + order.getOrderID() + "</h4></a>");
                         out.print("<h4>" + order.getUsername() + "</h4>");
                     }
                 }
             }
-
         %>
     </div>
 </div>

@@ -2,10 +2,7 @@ package blog.yisheng.bookstore.servlet;
 
 import blog.yisheng.bookstore.dao.impl.OrderDAOImpl;
 import blog.yisheng.bookstore.dao.impl.OrderRecordDAOImpl;
-import blog.yisheng.bookstore.entity.Book;
-import blog.yisheng.bookstore.entity.Cart;
-import blog.yisheng.bookstore.entity.Order;
-import blog.yisheng.bookstore.entity.OrderRecord;
+import blog.yisheng.bookstore.entity.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,10 +21,6 @@ public class OrderController extends HttpServlet {
     private Logger logger = Logger.getLogger("blog.yisheng.bookstore.servlet.orderController");
 
     public boolean isParaComplete(HttpServletRequest req) {
-        if (req.getParameter("username") == null) {
-            logger.warning("missing id in cart request");
-            return false;
-        }
         if (req.getParameter("address") == null) {
             logger.warning("missing amount in address request");
             return false;
@@ -37,7 +30,7 @@ public class OrderController extends HttpServlet {
             return false;
         }
         if (req.getParameter("receiver") == null) {
-            logger.warning("missing username in receiver request");
+            logger.warning("missing receiver in receiver request");
             return false;
         }
         return true;
@@ -52,7 +45,8 @@ public class OrderController extends HttpServlet {
             if (c != null) {
                 cart = (Cart) req.getSession().getAttribute("cart");
                 int mobile = Integer.parseInt(req.getParameter("mobile"));
-                String username = req.getParameter("username");
+                User user = (User) req.getSession().getAttribute("user");
+                String username = user.getUsername();
                 String address = req.getParameter("address");
                 String receiver = req.getParameter("receiver");
                 Date orderDate = new Date();

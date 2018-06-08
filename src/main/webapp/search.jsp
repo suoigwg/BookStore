@@ -5,8 +5,8 @@
   Time: 8:29 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="blog.yisheng.bookstore.db.JDBConnection" %>
-<%@ page import="java.sql.ResultSet" %>
+<%@ page import="blog.yisheng.bookstore.entity.Book" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <html>
@@ -18,49 +18,16 @@
 
 <div class="container">
     <div class="row">
-        <h1 class="lead" id="searchResultTitle"><%=request.getParameter("keyword")%><strong>的搜索结果</strong>
-        </h1>
+        <%
+            Object r = request.getAttribute("result");
+            if (r == null)
+                out.println("<h1>搜索关键字为空</h1>");
+            ArrayList<Book> result = (ArrayList<Book>) r;
+            for (Book book : result) {
+                out.print("<a href=detail.jsp?id=" + book.getID() + "><h1>" + book.getTitle() + "</h1></a>");
+            }
+        %>
     </div>
-
-    <table class="table table-responsive table-hover">
-
-
-            <%
-            request.setCharacterEncoding("utf-8");
-            String keyword = request.getParameter("keyword");
-            System.out.print(keyword);
-              JDBConnection con = new JDBConnection();
-              String sql = "select * from Book where title like '%"+keyword+"%' or Press like '%"+keyword+"%'";
-              ResultSet resultSet = con.executeQuery(sql);
-              if(resultSet.getFetchSize() == 0){
-                  out.println("找不到与"+keyword+"相关的搜索结果");
-              }
-              else {
-          %>
-        <tr>
-            <td><strong>Title</strong></td>
-            <td><strong>Price</strong></td>
-            <td><strong>Press</strong></td>
-        </tr>
-            <%
-
-      }
-      while (resultSet.next()){
-    %>
-        <tr>
-            <td><a href="detail.jsp?id=<%=resultSet.getString("ID")%>"><%=resultSet.getString("title")%>
-            </a></td>
-            <td><%=resultSet.getString("Price")%>
-            </td>
-            <td><%=resultSet.getString("Press")%>
-            </td>
-        </tr>
-
-
-            <%
-
-      }
-    %>
 </div>
 
 </body>

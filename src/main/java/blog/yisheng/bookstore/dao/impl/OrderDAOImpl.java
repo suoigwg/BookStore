@@ -45,7 +45,7 @@ public class OrderDAOImpl implements EntityDAO {
     @Override
     public void add(BaseEntity obj) {
         Order order = (Order) obj;
-        String sql = "insert into order (username, data, address, mobile, receiver)" +
+        String sql = "insert into orders (username, date, address, mobile, receiver)" +
                 "values (?,?,?,?,?);";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
@@ -68,7 +68,7 @@ public class OrderDAOImpl implements EntityDAO {
     @Override
     public void update(BaseEntity obj) {
         Order order = (Order) obj;
-        String sql = "update order set address = ?, mobile = ?, receiver = ?";
+        String sql = "update orders set address = ?, mobile = ?, receiver = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, order.getAddress());
@@ -104,7 +104,7 @@ public class OrderDAOImpl implements EntityDAO {
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, username);
-            stmt.setDate(2, (java.sql.Date) date);
+            stmt.setDate(2, new java.sql.Date(date.getTime()));
             ResultSet resultSet = stmt.executeQuery();
             if (resultSet.next()) {
                 return resultSet.getInt("orderid");

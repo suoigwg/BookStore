@@ -111,6 +111,7 @@ public class CartController extends HttpServlet {
                     break;
             }
             req.getSession().setAttribute("cart", cart);
+            req.getRequestDispatcher("detail.jsp?id=" + id).forward(req, resp);
         } else {
             logger.warning("insufficient argument for cart operation");
         }

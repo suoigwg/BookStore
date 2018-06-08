@@ -1,9 +1,9 @@
-<%@ page import="java.util.Collection" %>
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Iterator" %>
-<%@ page import="java.util.Set" %>
-<%@ page import="blog.yisheng.bookstore.entity.Book" %>
-<%@ page import="blog.yisheng.bookstore.entity.Cart" %><%--
+<%@ page import="blog.yisheng.bookstore.dao.impl.OrderDAOImpl" %>
+<%@ page import="blog.yisheng.bookstore.dao.impl.OrderRecordDAOImpl" %>
+<%@ page import="blog.yisheng.bookstore.entity.Order" %>
+<%@ page import="blog.yisheng.bookstore.entity.OrderRecord" %>
+<%@ page import="blog.yisheng.bookstore.entity.User" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: ysyang
   Date: 12/12/2016
@@ -21,64 +21,27 @@
 </head>
 <body>
 <jsp:include page="navbar.jsp"></jsp:include>
-
+<h3></h3>
 <div class="container">
-    <h1>您的订单正在处理中</h1>
-    <hr>
-    <h3>订单详情</h3>
-    <table class="table table-hover">
-        <%
-            request.setCharacterEncoding("utf-8");
-            Cart c = null;
-            if (session.getAttribute("cart") == null){
-                System.out.print("您的购物车是空的");
-            }
-            else{
-                c = (Cart) session.getAttribute("cart");
-            }
-            HashMap<Book, Integer> itemList = c.getCartItems();
-            Set<Book> booklist = itemList.keySet();
-            Iterator<Book> bookListIterator = booklist.iterator();
-            Collection<Integer> amountList = itemList.values();
-            Iterator<Integer> amountIterator = amountList.iterator();
-            while (bookListIterator.hasNext()){
-                Book b = bookListIterator.next();
-        %>
-        <tr>
-            <td><%=b.getTitle()%>
-            </td>
-            <td><%=b.getPrice()%></td>
-            <td><%=b.getPress()%></td>
-            <td><%=amountIterator.next()%></td>
-        </tr>
+    <%
+        if (session.getAttribute("user") == null) {
+            out.print("<h1>您尚未登录</h1>");
+        } else {
+            User user = (User) session.getAttribute("user");
+            OrderDAOImpl orderDAO = new OrderDAOImpl();
+            ArrayList<Order> orders = orderDAO.listOrders(user.getUsername());
+            OrderRecordDAOImpl orderRecordDAO = new OrderRecordDAOImpl();
+            for (Order order : orders) {
+                ArrayList<OrderRecord> orderRecords = orderRecordDAO.getOrderDetail(order.getOrderID());
+                for (OrderRecord record : orderRecords) {
+                    out.print("<h3>" + record.getOrderID() + "</h3>");
+                    out.print("<h3>" + record.getAmount() + "</h3>");
+                    out.print("<h3>" + record.getId() + "</h3>");
+                }
 
-        <%
             }
-            session.setAttribute("cart", null);
-        %>
-        <tr>
-            <td>总价: <%=c.getTotalPrice()%>
-            </td>
-        </tr>
-    </table>
-    <br><br>
-    <hr>
-    <h3>收货人信息</h3>
-    <table class="table table-hover">
-        <tr>
-            <td>收货人: <%=request.getParameter("receiver")%>
-            </td>
-        </tr>
-        <tr>
-            <td>地址: <%=request.getParameter("address")%>
-            </td>
-        </tr>
-        <tr>
-            <td>联系方式: <%=request.getParameter("mobile")%>
-            </td>
-        </tr>
-    </table>
-
+        }
+    %>
 </div>
 </body>
 </html>

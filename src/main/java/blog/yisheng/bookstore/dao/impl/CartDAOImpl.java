@@ -6,9 +6,9 @@ import blog.yisheng.bookstore.db.JDBConnection;
 import blog.yisheng.bookstore.entity.BaseEntity;
 import blog.yisheng.bookstore.entity.Book;
 import blog.yisheng.bookstore.entity.Cart;
-import blog.yisheng.bookstore.exception.MethodNotImplemented;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -65,7 +65,22 @@ public class CartDAOImpl implements EntityDAO {
     }
 
     @Override
-    public BaseEntity retrieve(String id) throws Exception {
-        throw new MethodNotImplemented();
+    public BaseEntity retrieve(String username) throws Exception {
+        String sql = "select * from cart where username = ?";
+        Cart cart = new Cart();
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, username);
+            ResultSet resultSet = stmt.executeQuery();
+            BookDAOImpl bookDAO = new BookDAOImpl();
+            while (resultSet.next()) {
+                Book book = (Book) bookDAO.retrieve(resultSet.getInt("id") + "");
+                cart.addItem(book, resultSet.getInt("amount"));
+            }
+            cart.setUsername(username);
+        } catch (SQLException e) {
+            logger.severe(e.getMessage());
+        }
+        return cart;
     }
 }
