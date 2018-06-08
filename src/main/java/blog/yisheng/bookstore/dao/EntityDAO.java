@@ -3,6 +3,8 @@ package blog.yisheng.bookstore.dao;
 import blog.yisheng.bookstore.entity.BaseEntity;
 
 public interface EntityDAO {
+
+
     void add(BaseEntity obj);
 
     void delete(BaseEntity obj);

@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Logger;
 
 public class OrderDAOImpl implements EntityDAO {
@@ -50,7 +51,7 @@ public class OrderDAOImpl implements EntityDAO {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, order.getUsername());
-            preparedStatement.setDate(2, order.getDate());
+            preparedStatement.setDate(2, new java.sql.Date(order.getDate().getTime()));
             preparedStatement.setString(3, order.getAddress());
             preparedStatement.setInt(4, order.getMobile());
             preparedStatement.setString(5, order.getReceiver());
@@ -97,5 +98,24 @@ public class OrderDAOImpl implements EntityDAO {
             logger.severe(e.getSQLState());
         }
         return orderList;
+    }
+
+    public int getRecentOrderID(String username, Date date) {
+        String sql = "select * from order where username = ? and date = ?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, username);
+            stmt.setDate(2, (java.sql.Date) date);
+            ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("orderid");
+            } else {
+                logger.severe("No recent order found for user " + username);
+            }
+
+        } catch (SQLException e) {
+            logger.severe(e.getMessage());
+        }
+        return -1;
     }
 }

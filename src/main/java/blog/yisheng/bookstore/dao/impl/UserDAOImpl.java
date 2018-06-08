@@ -18,6 +18,7 @@ public class UserDAOImpl implements EntityDAO {
     private JDBConnection conn = null;
 
     public UserDAOImpl() {
+        logger = Logger.getLogger("blog.yisheng.bookstore.bookdaoimpl");
         conn = ConnectionFactory.getConnection();
     }
 

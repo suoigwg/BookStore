@@ -1,4 +1,4 @@
-<%@ page import="java.io.PrintWriter" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: ysyang
   Date: 11/12/2016
@@ -18,7 +18,6 @@
         out.print("<a href=\"login.jsp\">Login</a>");
     }else{
         request.getRequestDispatcher(request.getContextPath()+"index.jsp").forward(request,response);
-
     }
 %>
 

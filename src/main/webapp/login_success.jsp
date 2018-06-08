@@ -17,7 +17,7 @@
     <h2>Welcome <%=session.getAttribute("user")%>
     </h2>
     <%
-        //        request.getRequestDispatcher("/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     %>
 </body>
 </html>

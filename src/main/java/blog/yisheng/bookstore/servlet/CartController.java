@@ -69,6 +69,7 @@ public class CartController extends HttpServlet {
     private void clear(HttpServletRequest req, Cart cart) {
         CartDAOImpl cartDAO = new CartDAOImpl();
         cartDAO.delete(cart);
+        cart.clear();
     }
 
     private void printCart(HttpServletResponse resp, Cart cart) {

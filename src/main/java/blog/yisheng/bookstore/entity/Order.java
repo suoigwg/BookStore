@@ -1,7 +1,7 @@
 package blog.yisheng.bookstore.entity;
 
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -23,6 +23,7 @@ public class Order extends BaseEntity {
         this.date = date;
         itemList = new HashMap<Book, Integer>();
     }
+
 
     public Order() {
     }
