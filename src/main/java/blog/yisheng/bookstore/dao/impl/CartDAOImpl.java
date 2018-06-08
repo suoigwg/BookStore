@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 public class CartDAOImpl implements EntityDAO {
-    private Logger logger = Logger.getLogger("blog.yisheng.bookstore.cartdaoimpl");
+    private Logger logger = Logger.getLogger("blog.yisheng.bookstore.cartdaoImpl");
     private JDBConnection conn = null;
 
 
@@ -46,14 +46,14 @@ public class CartDAOImpl implements EntityDAO {
     @Override
     public void delete(BaseEntity obj) {
         Cart cart = (Cart) obj;
-        String sql = "delete  from Cart where username = ?";
+        String sql = "delete from Cart where username = ?";
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, cart.getUsername());
             int row = stmt.executeUpdate();
             logger.info(row + " records deleted from cart");
         } catch (SQLException e) {
-            logger.severe(e.getSQLState());
+            logger.severe(e.getMessage());
         }
     }
 

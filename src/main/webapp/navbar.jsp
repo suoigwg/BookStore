@@ -1,4 +1,4 @@
-<%--
+<%@ page import="blog.yisheng.bookstore.entity.User" %><%--
   Created by IntelliJ IDEA.
   User: ysyang
   Date: 13/12/2016
@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" >
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <title>Title</title>
@@ -25,16 +25,12 @@
         <form class="navbar-form navbar-left pull-right" method="get" action="search">
             <span class="hidden-xs">
                 <%
-                    if (session.getAttribute("username")!=null){
-                        %>
-                <span><%=session.getAttribute("username")%>&nbsp;&nbsp;</span>
-                <a href="logout.jsp">退出</a>&nbsp;&nbsp;
-                <%
-                    }else{
-                        %>
-                    <a href="login.jsp">登录</a>&nbsp;&nbsp;
-                    <a href="register.jsp">注册</a>&nbsp;&nbsp;
-                <%
+                    if (session.getAttribute("user") == null) {
+                        out.print("<a href=\"login.jsp\">登录</a>&nbsp;&nbsp;");
+                        out.print("<a href=\"register.jsp\">注册</a>&nbsp;&nbsp;");
+                    } else {
+                        User user = (User) session.getAttribute("user");
+                        out.print(user);
                     }
                 %>
                 <a href="manage.jsp" hidden="hidden">管理</a>&nbsp;&nbsp;

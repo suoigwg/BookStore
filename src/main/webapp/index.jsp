@@ -61,7 +61,7 @@
 
         <div class="col-lg-3">
             <%
-                if (session.getAttribute("username") == null) {
+                if (session.getAttribute("user") == null) {
             %>
             <p class="lead text-center">欢迎</p>
             <a href="register.jsp" class="text-center">
@@ -71,7 +71,7 @@
             } else {
             %>
             <br><br><br>
-            <p class="lead text-center">欢迎 <%=session.getAttribute("username")%>
+            <p class="lead text-center">欢迎 <%=session.getAttribute("user")%>
             </p>
             <%
                 }
@@ -86,6 +86,7 @@
 
 
             <%
+
                 Random ran = new Random();
                 int x = ran.nextInt(4000) + 5;
             %>

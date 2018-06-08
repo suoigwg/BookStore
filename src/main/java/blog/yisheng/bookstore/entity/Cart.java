@@ -59,4 +59,8 @@ public class Cart extends BaseEntity {
         cartItems.clear();
     }
 
+    public boolean isEmpty() {
+        return cartItems.isEmpty();
+    }
+
 }

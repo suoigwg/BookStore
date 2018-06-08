@@ -27,6 +27,7 @@ public class Login extends HttpServlet {
         if (userDAO.checkCredentials(newUser)) {
             req.getSession().setAttribute("user", newUser);
             req.getRequestDispatcher("login_success.jsp").forward(req, resp);
+            req.getSession().setAttribute("user", newUser);
             out.println("login success");
         } else {
             out.println("bad credentials");
