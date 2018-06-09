@@ -51,6 +51,7 @@
                     } else {
                         User user = (User) session.getAttribute("user");
                         out.print("<h5>" + user.getUsername() + "</h5>");
+                        out.print("<a href=\"logout\">退出登录</a>");
                     }
                 %>
 
