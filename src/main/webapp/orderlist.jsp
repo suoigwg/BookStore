@@ -15,23 +15,27 @@
 <body>
 <div class="container">
     <%@include file="navbar.html" %>
-    <%
-        if (session.getAttribute("user") == null) {
-            out.print("<h1>您尚未登录</h1>");
-        } else {
-            User user = (User) session.getAttribute("user");
-            OrderDAOImpl orderDAO = new OrderDAOImpl();
-            ArrayList<Order> orders = orderDAO.listOrders(user.getUsername());
-            if (orders.size() == 0) {
-                out.print("<h1>您没有订单记录</h1>");
+    <div style="margin-left: 5%; margin-right: 5%">
+        <%
+            if (session.getAttribute("user") == null) {
+                out.print("<h1>您尚未登录</h1>");
             } else {
-                for (Order order : orders) {
-                    out.print("<a href=orderdetail.jsp?orderid=" + order.getOrderID() + "><h4>" + order.getOrderID() + "</h4></a>");
-                    out.print("<h4>" + order.getUsername() + "</h4>");
+                User user = (User) session.getAttribute("user");
+                OrderDAOImpl orderDAO = new OrderDAOImpl();
+                ArrayList<Order> orders = orderDAO.listOrders(user.getUsername());
+                if (orders.size() == 0) {
+                    out.print("<h1>您没有订单记录</h1>");
+                } else {
+                    for (Order order : orders) {
+                        out.print("<a href=orderdetail.jsp?orderid=" + order.getOrderID() + "><h4>订单号:" + order.getOrderID() + "</h4></a>");
+                        out.print("<p class=\"lead\">收件人：" + order.getUsername() + "</p>");
+                        out.print("<p class=\"lead\">创建日期：" + order.getDate() + "</p>");
+                    }
                 }
             }
-        }
-    %>
+        %>
+    </div>
+
 
     <%@include file="footer.html" %>
 </div>
