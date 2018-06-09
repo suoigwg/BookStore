@@ -1,9 +1,8 @@
-<%@ page import="blog.yisheng.bookstore.dao.impl.OrderDAOImpl" %>
 <%@ page import="blog.yisheng.bookstore.dao.impl.OrderRecordDAOImpl" %>
-<%@ page import="blog.yisheng.bookstore.entity.Order" %>
 <%@ page import="blog.yisheng.bookstore.entity.OrderRecord" %>
 <%@ page import="blog.yisheng.bookstore.entity.User" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%--
   Created by IntelliJ IDEA.
   User: ysyang
   Date: 12/12/2016
@@ -28,17 +27,13 @@
             out.print("<h1>您尚未登录</h1>");
         } else {
             User user = (User) session.getAttribute("user");
-            OrderDAOImpl orderDAO = new OrderDAOImpl();
-            ArrayList<Order> orders = orderDAO.listOrders(user.getUsername());
-            OrderRecordDAOImpl orderRecordDAO = new OrderRecordDAOImpl();
-            for (Order order : orders) {
-                ArrayList<OrderRecord> orderRecords = orderRecordDAO.getOrderDetail(order.getOrderID());
-                for (OrderRecord record : orderRecords) {
-                    out.print("<h3>" + record.getOrderID() + "</h3>");
-                    out.print("<h3>" + record.getAmount() + "</h3>");
-                    out.print("<h3>" + record.getId() + "</h3>");
-                }
-
+            String orderID = request.getParameter("orderid");
+            OrderRecordDAOImpl recordDAO = new OrderRecordDAOImpl();
+            ArrayList<OrderRecord> orderRecords = recordDAO.getOrderDetail(Integer.parseInt(orderID));
+            for (OrderRecord record : orderRecords) {
+                out.print("<h3>" + record.getOrderID() + "</h3>");
+                out.print("<h3>" + record.getAmount() + "</h3>");
+                out.print("<h3>" + record.getId() + "</h3>");
             }
         }
     %>

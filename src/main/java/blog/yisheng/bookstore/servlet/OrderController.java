@@ -1,5 +1,6 @@
 package blog.yisheng.bookstore.servlet;
 
+import blog.yisheng.bookstore.dao.impl.CartDAOImpl;
 import blog.yisheng.bookstore.dao.impl.OrderDAOImpl;
 import blog.yisheng.bookstore.dao.impl.OrderRecordDAOImpl;
 import blog.yisheng.bookstore.entity.*;
@@ -62,6 +63,11 @@ public class OrderController extends HttpServlet {
                     orderRecordDAO.add(orderRecord);
                     logger.info("inserting " + item.getKey() + ":" + item.getValue());
                 }
+                req.getRequestDispatcher("orderlist.jsp").forward(req, resp);
+                cart.clear();
+                CartDAOImpl cartDAO = new CartDAOImpl();
+                cartDAO.delete(cart);
+                req.getSession().setAttribute("cart", cart);
             } else {
                 logger.severe("Placing order with no cart");
             }

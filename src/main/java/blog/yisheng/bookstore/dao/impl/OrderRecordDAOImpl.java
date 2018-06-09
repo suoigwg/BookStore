@@ -25,6 +25,7 @@ public class OrderRecordDAOImpl implements EntityDAO {
                 record.setId(resultSet.getInt("id"));
                 record.setAmount(resultSet.getInt("amount"));
                 record.setOrderID(resultSet.getInt("orderid"));
+                orderRecords.add(record);
             }
         } catch (SQLException e) {
             logger.severe(e.getMessage());

@@ -34,7 +34,7 @@
                     out.print("<h1>您没有订单记录</h1>");
                 } else {
                     for (Order order : orders) {
-                        out.print("<a href=orderdetail.jsp?id=" + order.getOrderID() + "><h4>" + order.getOrderID() + "</h4></a>");
+                        out.print("<a href=orderdetail.jsp?orderid=" + order.getOrderID() + "><h4>" + order.getOrderID() + "</h4></a>");
                         out.print("<h4>" + order.getUsername() + "</h4>");
                     }
                 }
