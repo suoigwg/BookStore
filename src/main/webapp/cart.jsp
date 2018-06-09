@@ -15,27 +15,30 @@
 <body>
 <div class="container">
     <%@include file="navbar.html" %>
-    <%
-        if (session.getAttribute("user") == null) {
-            out.println("<h1>您尚未登录</h1>");
-        } else {
-            Object c = session.getAttribute("cart");
-            Cart cart = null;
-            cart = c == null ? new Cart() : (Cart) c;
-            if (cart.isEmpty()) {
-                out.println("<h1>您的购物车是空的</h1>");
-            } else {
-                HashMap<Book, Integer> itemList = cart.getCartItems();
-                for (Map.Entry<Book, Integer> item : itemList.entrySet()) {
-                    out.print(item.getKey().getTitle() + ":");
-                    out.print(item.getValue());
-                }
-                out.print("<h1>总金额为:</h1>" + cart.getTotalPrice());
-                out.print("<a href=\"place_order.jsp\"><h2>提交订单</h2></a>");
-            }
-        }
-    %>
+    <div style="margin-left: 5%; margin-top: 5%">
 
+        <%
+            if (session.getAttribute("user") == null) {
+                out.println("<h1>您尚未登录</h1>");
+            } else {
+                Object c = session.getAttribute("cart");
+                Cart cart = null;
+                cart = c == null ? new Cart() : (Cart) c;
+                if (cart.isEmpty()) {
+                    out.println("<h1>您的购物车是空的</h1>");
+                } else {
+                    HashMap<Book, Integer> itemList = cart.getCartItems();
+                    for (Map.Entry<Book, Integer> item : itemList.entrySet()) {
+                        out.print("<p class=\"lead\">商品名称:" + item.getKey().getTitle() + "</p>");
+                        out.print("<p>单价：" + item.getKey().getPrice() + "</p>");
+                        out.print("<p>数量：" + item.getValue() + "</p>");
+                    }
+                    out.print("<h5>总金额为:" + cart.getTotalPrice() + "</h5>");
+                    out.print("<a href=\"place_order.jsp\"><button class=\"btn btn-primary\">提交订单</button></a>");
+                }
+            }
+        %>
+    </div>
     <%@include file="footer.html" %>
 </div>
 
