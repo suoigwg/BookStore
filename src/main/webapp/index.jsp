@@ -47,7 +47,8 @@
                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                 <%
                     if (session.getAttribute("user") == null) {
-                        out.print("<a href=\"login.jsp\" class=\"btn btn-primary\">Login</a>");
+                        out.println("<a href=\"login.jsp\" class=\"btn btn-primary btn-lg\">登录</a>");
+                        out.print("<a href=\"register.jsp\" class=\"btn btn-primary btn-lg\">注册</a>");
                     } else {
                         User user = (User) session.getAttribute("user");
                         out.print("<h5>" + user.getUsername() + "</h5>");
