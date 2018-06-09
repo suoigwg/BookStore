@@ -1,4 +1,4 @@
-<%--
+<%@ page import="blog.yisheng.bookstore.entity.User" %><%--
   Created by IntelliJ IDEA.
   User: ysyang
   Date: 10/12/2016
@@ -45,7 +45,15 @@
             <div class="card-body" style="margin-top: 40%">
                 <h5 class="card-title">Best place to find the book you love</h5>
                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="login.jsp" class="btn btn-primary">Login</a>
+                <%
+                    if (session.getAttribute("user") == null) {
+                        out.print("<a href=\"login.jsp\" class=\"btn btn-primary\">Login</a>");
+                    } else {
+                        User user = (User) session.getAttribute("user");
+                        out.print("<h5>" + user.getUsername() + "</h5>");
+                    }
+                %>
+
             </div>
         </div>
         <div class="card col-lg-4 text-center ">

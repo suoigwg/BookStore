@@ -35,7 +35,7 @@ public class Login extends HttpServlet {
             } catch (Exception e) {
                 out.print(e.getMessage());
             }
-            req.getRequestDispatcher("login_success.jsp").forward(req, resp);
+            req.getRequestDispatcher("index.jsp").forward(req, resp);
             out.println("login success");
         } else {
             out.println("bad credentials");
