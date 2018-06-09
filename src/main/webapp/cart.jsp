@@ -11,16 +11,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/custom.css">
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <title>购物车</title>
-</head>
+<%@include file="header.html" %>
 <body>
-<jsp:include page="navbar.jsp"></jsp:include>
 <div class="container">
+    <%@include file="navbar.html" %>
     <%
         if (session.getAttribute("user") == null) {
             out.println("<h1>您尚未登录</h1>");
@@ -37,13 +31,13 @@
                     out.print(item.getValue());
                 }
                 out.print("<h1>总金额为:</h1>" + cart.getTotalPrice());
+                out.print("<a href=\"place_order.jsp\"><h2>提交订单</h2></a>");
             }
         }
     %>
-    <a href="place_order.jsp"><h2>提交订单</h2></a>
 
+    <%@include file="footer.html" %>
 </div>
 
-<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

@@ -11,36 +11,29 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
-<head>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/custom.css">
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <title>Order History</title>
-</head>
-
+<%@include file="header.html" %>
 <body>
-<jsp:include page="navbar.jsp"></jsp:include>
 <div class="container">
-    <div class="row">
-        <%
-            if (session.getAttribute("user") == null) {
-                out.print("<h1>您尚未登录</h1>");
+    <%@include file="navbar.html" %>
+    <%
+        if (session.getAttribute("user") == null) {
+            out.print("<h1>您尚未登录</h1>");
+        } else {
+            User user = (User) session.getAttribute("user");
+            OrderDAOImpl orderDAO = new OrderDAOImpl();
+            ArrayList<Order> orders = orderDAO.listOrders(user.getUsername());
+            if (orders.size() == 0) {
+                out.print("<h1>您没有订单记录</h1>");
             } else {
-                User user = (User) session.getAttribute("user");
-                OrderDAOImpl orderDAO = new OrderDAOImpl();
-                ArrayList<Order> orders = orderDAO.listOrders(user.getUsername());
-                if (orders.size() == 0) {
-                    out.print("<h1>您没有订单记录</h1>");
-                } else {
-                    for (Order order : orders) {
-                        out.print("<a href=orderdetail.jsp?orderid=" + order.getOrderID() + "><h4>" + order.getOrderID() + "</h4></a>");
-                        out.print("<h4>" + order.getUsername() + "</h4>");
-                    }
+                for (Order order : orders) {
+                    out.print("<a href=orderdetail.jsp?orderid=" + order.getOrderID() + "><h4>" + order.getOrderID() + "</h4></a>");
+                    out.print("<h4>" + order.getUsername() + "</h4>");
                 }
             }
-        %>
-    </div>
+        }
+    %>
+
+    <%@include file="footer.html" %>
 </div>
 
 
