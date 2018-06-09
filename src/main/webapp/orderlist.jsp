@@ -15,7 +15,7 @@
 <body>
 <div class="container">
     <%@include file="navbar.html" %>
-    <div style="margin-left: 5%; margin-right: 5%">
+    <div style="margin-left: 5%; margin-top: 5%">
         <%
             if (session.getAttribute("user") == null) {
                 out.print("<h1>您尚未登录</h1>");

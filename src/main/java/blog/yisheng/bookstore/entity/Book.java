@@ -5,8 +5,8 @@ package blog.yisheng.bookstore.entity;
  */
 
 public class Book extends BaseEntity {
-    private int ID, stock, ISBN;
-    private String title, Press, Author;
+    private int ID, stock;
+    private String title, Press, Author, ISBN;
     private double Price;
 
     public Book() {
@@ -36,11 +36,11 @@ public class Book extends BaseEntity {
         this.title = title;
     }
 
-    public int getISBN() {
+    public String getISBN() {
         return ISBN;
     }
 
-    public void setISBN(int ISBN) {
+    public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
 

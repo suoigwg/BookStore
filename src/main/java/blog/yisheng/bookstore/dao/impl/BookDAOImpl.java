@@ -28,7 +28,7 @@ public class BookDAOImpl implements EntityDAO {
                 Book book = new Book();
                 book.setTitle(resultSet.getString("title"));
                 book.setAuthor(resultSet.getString("author"));
-                book.setISBN(resultSet.getInt("isbn"));
+                book.setISBN(resultSet.getString("isbn"));
                 book.setPress(resultSet.getString("press"));
                 book.setPrice(resultSet.getDouble("price"));
                 book.setStock(resultSet.getInt("stock"));
@@ -50,7 +50,7 @@ public class BookDAOImpl implements EntityDAO {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, book.getTitle());
-            preparedStatement.setInt(2, book.getISBN());
+            preparedStatement.setString(2, book.getISBN());
             preparedStatement.setDouble(3, book.getPrice());
             preparedStatement.setInt(4, book.getStock());
             preparedStatement.setString(5, book.getPress());
@@ -68,7 +68,7 @@ public class BookDAOImpl implements EntityDAO {
         String sql = "delete from book where isbn = ?;";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, book.getISBN());
+            preparedStatement.setString(1, book.getISBN());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             logger.severe(e.getMessage());
@@ -83,12 +83,12 @@ public class BookDAOImpl implements EntityDAO {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, book.getTitle());
-            preparedStatement.setInt(2, book.getISBN());
+            preparedStatement.setString(2, book.getISBN());
             preparedStatement.setDouble(3, book.getPrice());
             preparedStatement.setInt(4, book.getStock());
             preparedStatement.setString(5, book.getPress());
             preparedStatement.setString(6, book.getAuthor());
-            preparedStatement.setInt(7, book.getISBN());
+            preparedStatement.setString(7, book.getISBN());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             logger.severe(e.getMessage());
@@ -121,7 +121,7 @@ public class BookDAOImpl implements EntityDAO {
                 book = new Book();
                 book.setTitle(resultSet.getString("title"));
                 book.setAuthor(resultSet.getString("author"));
-                book.setISBN(resultSet.getInt("isbn"));
+                book.setISBN(resultSet.getString("isbn"));
                 book.setPress(resultSet.getString("press"));
                 book.setPrice(resultSet.getDouble("price"));
                 book.setStock(resultSet.getInt("stock"));

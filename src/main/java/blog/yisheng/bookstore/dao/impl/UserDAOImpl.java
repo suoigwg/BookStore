@@ -41,7 +41,7 @@ public class UserDAOImpl implements EntityDAO {
     @Override
     public void delete(BaseEntity obj) {
         User user = (User) obj;
-        String sql = "delete from book where isbn = ?;";
+        String sql = "delete from book where email = ?;";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, user.getEmail());

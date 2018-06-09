@@ -21,9 +21,10 @@ public class Register extends HttpServlet {
                 req.getParameter("email"));
         if (userDAO.isUserExist(newUser)) {
             out.println("username/email already exists");
+            resp.sendRedirect("error.html");
         } else {
             userDAO.add(newUser);
-            out.println("success");
+            resp.sendRedirect("index.jsp");
         }
     }
 }

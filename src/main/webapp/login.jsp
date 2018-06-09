@@ -16,7 +16,7 @@
         <form method="post" action="login">
             <form>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">邮件地址</label>
+                    <label for="exampleInputEmail1">用户名</label>
                     <input value="Yisheng Yang" name="username" type="text" class="form-control" id="exampleInputEmail1"
                            placeholder="Username">
                 </div>
